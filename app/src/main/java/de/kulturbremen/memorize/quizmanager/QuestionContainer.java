@@ -1,5 +1,7 @@
 package de.kulturbremen.memorize.quizmanager;
 
+import androidx.annotation.NonNull;
+
 public class QuestionContainer {
     private String question;
     private String answer;
@@ -24,4 +26,14 @@ public class QuestionContainer {
     public void setAnswer(String answer) {
         this.answer = answer;
     }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "QuestionContainer{" +
+                "question='" + question + '\'' +
+                ", answer='" + answer + '\'' +
+                '}';
+    }
+
 }

@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.Random;
 
 public class QuizManager{
-    private static ArrayList<QuestionContainer> QUESTIONS;
-    private static ArrayList<Integer> unansweredQuestions;  // with indexes from QUESTIONS
+    private static ArrayList<QuestionContainer> QUESTIONS = new ArrayList<>();
+    private static ArrayList<Integer> unansweredQuestions = new ArrayList<>();  // with indexes from QUESTIONS
 
     public static void setQUESTIONS(ArrayList<QuestionContainer> questions) {
         QUESTIONS = questions;
@@ -18,19 +18,46 @@ public class QuizManager{
         Collections.shuffle(unansweredQuestions);
     }
 
-    public static QuestionContainer getQuestion(){
+    public static QuestionContainer getQuestion() throws NoMoreQuestions {
+        if (unansweredQuestions.isEmpty()) {
+            throw new NoMoreQuestions();
+        }
+
         int questionIndex = unansweredQuestions.get(0);
         return QUESTIONS.get(questionIndex);
     }
 
-    public static boolean checkAnswer(String userAnswer){
+    public static boolean checkAnswer(String userAnswer) throws NoMoreQuestions {
+        if (unansweredQuestions.isEmpty()) {
+            throw new NoMoreQuestions();
+        }
+
         String savedAnswer = QUESTIONS.get(unansweredQuestions.get(0)).getAnswer();
         return savedAnswer.equals(userAnswer.trim());
     }
 
-    public static void removeLastQuestion(){unansweredQuestions.remove(0);}
+    public static void removeLastQuestion() throws NoMoreQuestions {
+        if (unansweredQuestions.isEmpty()) {
+            throw new NoMoreQuestions();
+        }
 
-    public static void reshuffleLastQuestion(){
+        unansweredQuestions.remove(0);
+
+        if (unansweredQuestions.isEmpty()) { // then also remove QUESTIONS
+            QUESTIONS = new ArrayList<>();
+        }
+    }
+
+    public static void removeAllQuestions() {
+        QUESTIONS = new ArrayList<>();
+        unansweredQuestions = new ArrayList<>();
+    }
+
+    public static void reshuffleLastQuestion() throws NoMoreQuestions {
+        if (unansweredQuestions.isEmpty()) {
+            throw new NoMoreQuestions();
+        }
+
         int lastQuestion = unansweredQuestions.remove(0);
         if (unansweredQuestions.size() > 1) {
             int newIndex = new Random().nextInt(unansweredQuestions.size()) + 1;  // never at 0
@@ -42,6 +69,9 @@ public class QuizManager{
 
     public static boolean hasQuestions(){
         return unansweredQuestions.size() != 0;
+    }
+
+    public static class NoMoreQuestions extends RuntimeException {
     }
 
 }
