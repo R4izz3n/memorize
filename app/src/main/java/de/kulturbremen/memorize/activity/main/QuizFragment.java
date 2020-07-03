@@ -78,7 +78,8 @@ public class QuizFragment extends Fragment implements QuizRecyclerAdapter.OnQuiz
     public void onQuizClick(int position) {
         Intent intent = new Intent(getActivity(), Question.class);
         MainActivity.setTestData();
-        if (QuizManager.hasQuestions()) {
+        QuizManager qm = QuizManager.getInstance();
+        if (qm.hasQuestions()) {
             Log.d(TAG, "onQuizClick: " + position);
             startActivity(intent);
         } else {

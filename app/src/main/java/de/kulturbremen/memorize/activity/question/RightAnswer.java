@@ -18,9 +18,10 @@ public class RightAnswer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_right_answer);
 
-        QuizManager.removeLastQuestion();
+        QuizManager qm = QuizManager.getInstance();
+        qm.removeLastQuestion();
 
-        if (QuizManager.hasQuestions()) {
+        if (qm.hasQuestions()) {
             Intent intent = new Intent(this, Question.class);
             waitAndGoToNextIntent(intent);
         } else {

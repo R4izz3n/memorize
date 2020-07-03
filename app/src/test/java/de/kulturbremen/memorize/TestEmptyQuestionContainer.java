@@ -13,9 +13,11 @@ import de.kulturbremen.memorize.quizmanager.QuizManager;
 
 public class TestEmptyQuestionContainer {
 
+    QuizManager quizManager = QuizManager.getInstance();
+
     @BeforeEach
     void emptyQuizManagerBefore() {
-        QuizManager.removeAllQuestions();
+        quizManager.removeAllQuestions();
     }
 
     @Test
@@ -25,35 +27,35 @@ public class TestEmptyQuestionContainer {
         ArrayList<QuestionContainer> questions = new ArrayList<>();
         QuestionContainer questionAdded = new QuestionContainer("new q 1", "new a 1");
         questions.add(questionAdded);
-        QuizManager.setQuestions(questions);
+        quizManager.setQuestions(questions);
         // THEN getQuestion should return a question
-        QuestionContainer questionRetrieved = QuizManager.getQuestionContainer();
+        QuestionContainer questionRetrieved = quizManager.getQuestionContainer();
         assertEquals(questionAdded, questionRetrieved);
     }
 
     @Test
     void getQuestionThrows() {
-        assertThrows(QuizManager.NoMoreQuestions.class, QuizManager::getQuestionContainer);
+        assertThrows(QuizManager.NoMoreQuestions.class, quizManager::getQuestionContainer);
     }
 
     @Test
     void checkAnswerThrows() {
         assertThrows(QuizManager.NoMoreQuestions.class, () ->
-                QuizManager.checkAnswer("nothing"));
+                quizManager.checkAnswer("nothing"));
     }
 
     @Test
     void removeLastQuestionThrows() {
-        assertThrows(QuizManager.NoMoreQuestions.class, QuizManager::removeLastQuestion);
+        assertThrows(QuizManager.NoMoreQuestions.class, quizManager::removeLastQuestion);
     }
 
     @Test
     void reshuffleLastQuestionThrows() {
-        assertThrows(QuizManager.NoMoreQuestions.class, QuizManager::reshuffleLastQuestion);
+        assertThrows(QuizManager.NoMoreQuestions.class, quizManager::reshuffleLastQuestion);
     }
 
     @Test
     void hasQuestionsReturnsFalse() {
-        assertFalse(QuizManager.hasQuestions());
+        assertFalse(quizManager.hasQuestions());
     }
 }

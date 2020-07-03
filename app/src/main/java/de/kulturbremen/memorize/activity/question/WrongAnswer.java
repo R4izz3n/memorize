@@ -20,10 +20,11 @@ public class WrongAnswer extends AppCompatActivity {
         setContentView(R.layout.activity_wrong_answer);
 
         // set the text of the question
-        String answer = QuizManager.getQuestionContainer().getAnswer();
+        QuizManager qm = QuizManager.getInstance();
+        String answer = qm.getQuestionContainer().getAnswer();
         TextView textView = findViewById(R.id.correctAnswer);
         textView.setText(answer);
-        QuizManager.reshuffleLastQuestion();
+        qm.reshuffleLastQuestion();
         waitAndGoToNextQuestion();
     }
 

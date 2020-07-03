@@ -21,7 +21,8 @@ public class Question extends AppCompatActivity {
         setContentView(R.layout.activity_question);
 
         // set the text of the question
-        String question = QuizManager.getQuestionContainer().getQuestion();
+        QuizManager qm = QuizManager.getInstance();
+        String question = qm.getQuestionContainer().getQuestion();
         TextView textView = findViewById(R.id.lastQuestionMessage);
         textView.setText(question);
 
@@ -34,8 +35,9 @@ public class Question extends AppCompatActivity {
         EditText editText = findViewById(R.id.userAnswer);
         String userAnswer = editText.getText().toString();
         Intent intent;
+        QuizManager qm = QuizManager.getInstance();
 
-        if (QuizManager.checkAnswer(userAnswer)){
+        if (qm.checkAnswer(userAnswer)){
             intent = new Intent(this, RightAnswer.class);
         } else {
             intent = new Intent(this, WrongAnswer.class);

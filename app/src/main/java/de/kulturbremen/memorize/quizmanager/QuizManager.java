@@ -6,34 +6,45 @@ import java.util.Random;
 
 
 /**
- * A static class that holds QuestionContainers
+ * A singleton class that holds QuestionContainers
  *
  * Questions will always be shuffled, and can sequentially be retrieved, removed or reshuffled.
  * The most recent question can be compared to a user answer.
  *
  * A typical use scenario would work like so:
- * QuizManager.setQuestions(myQuestions);
- * if (QuizManager.hasQuestions()) {...}
- * String question = QuizManager.getQuestionContainer().getQuestion();
+ * QuizManager qm = QuizManager.getInstance();
+ * qm.setQuestions(myQuestions);
+ * if (qm.hasQuestions()) {...}
+ * String question = qm.getQuestionContainer().getQuestion();
  * // (...)
- * boolean answerIsCorrect = QuizManager.checkAnswer(userAnswer);
+ * boolean answerIsCorrect = qm.checkAnswer(userAnswer);
  * // and then
- * QuizManager.removeLastQuestion();
+ * qm.removeLastQuestion();
  * // or
- * QuizManager.reshuffleLastQuestion()
+ * qm.reshuffleLastQuestion()
  *
  * hasQuestions() and setQuestions() can always be called, the other methods will throw a
  * noMoreQuestions RuntimeException when there are no questions left.
  */
 public class QuizManager{
+    private static QuizManager instance = new QuizManager();
     private static ArrayList<QuestionContainer> QUESTIONS = new ArrayList<>();
     private static ArrayList<Integer> unansweredQuestions = new ArrayList<>();  // with indexes from QUESTIONS
 
-    public static boolean hasQuestions(){
+    /**
+     * private constructor so it cannot be instantiated
+     */
+    private QuizManager() {}
+
+    public static QuizManager getInstance(){
+        return instance;
+    }
+
+    public boolean hasQuestions(){
         return !unansweredQuestions.isEmpty();
     }
 
-    public static void setQuestions(ArrayList<QuestionContainer> questions) {
+    public void setQuestions(ArrayList<QuestionContainer> questions) {
         QUESTIONS = questions;
         unansweredQuestions = new ArrayList<>();
 
@@ -43,7 +54,7 @@ public class QuizManager{
         Collections.shuffle(unansweredQuestions);
     }
 
-    public static QuestionContainer getQuestionContainer() throws NoMoreQuestions {
+    public QuestionContainer getQuestionContainer() throws NoMoreQuestions {
         if (unansweredQuestions.isEmpty()) {
             throw new NoMoreQuestions();
         }
@@ -59,7 +70,7 @@ public class QuizManager{
      * @return true if the answer is correct, false if the answer is wrong
      * @throws NoMoreQuestions when QuizContainer has no more questions
      */
-    public static boolean checkAnswer(String userAnswer) throws NoMoreQuestions {
+    public boolean checkAnswer(String userAnswer) throws NoMoreQuestions {
         if (unansweredQuestions.isEmpty()) {
             throw new NoMoreQuestions();
         }
@@ -68,7 +79,7 @@ public class QuizManager{
         return savedAnswer.equals(userAnswer.trim());
     }
 
-    public static void removeLastQuestion() throws NoMoreQuestions {
+    public void removeLastQuestion() throws NoMoreQuestions {
         if (unansweredQuestions.isEmpty()) {
             throw new NoMoreQuestions();
         }
@@ -80,12 +91,12 @@ public class QuizManager{
         }
     }
 
-    public static void removeAllQuestions() {
+    public void removeAllQuestions() {
         QUESTIONS = new ArrayList<>();
         unansweredQuestions = new ArrayList<>();
     }
 
-    public static void reshuffleLastQuestion() throws NoMoreQuestions {
+    public void reshuffleLastQuestion() throws NoMoreQuestions {
         if (unansweredQuestions.isEmpty()) {
             throw new NoMoreQuestions();
         }
