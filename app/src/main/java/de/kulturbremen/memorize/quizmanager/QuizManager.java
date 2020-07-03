@@ -68,7 +68,7 @@ public class QuizManager{
     }
 
     public static boolean hasQuestions(){
-        return unansweredQuestions.size() != 0;
+        return !unansweredQuestions.isEmpty();
     }
 
     public static class NoMoreQuestions extends RuntimeException {
