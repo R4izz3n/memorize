@@ -24,6 +24,6 @@ public class MainActivity extends AppCompatActivity {
         questions.add(new QuestionContainer("boek", "Buch"));
         questions.add(new QuestionContainer("boom", "Baum"));
         questions.add(new QuestionContainer("tv kijken", "fernsehen"));
-        QuizManager.setQUESTIONS(questions);
+        QuizManager.setQuestions(questions);
     }
 }

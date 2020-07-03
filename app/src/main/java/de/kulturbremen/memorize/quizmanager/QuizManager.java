@@ -4,11 +4,36 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+
+/**
+ * A static class that holds QuestionContainers
+ *
+ * Questions will always be shuffled, and can sequentially be retrieved, removed or reshuffled.
+ * The most recent question can be compared to a user answer.
+ *
+ * A typical use scenario would work like so:
+ * QuizManager.setQuestions(myQuestions);
+ * if (QuizManager.hasQuestions()) {...}
+ * String question = QuizManager.getQuestionContainer().getQuestion();
+ * // (...)
+ * boolean answerIsCorrect = QuizManager.checkAnswer(userAnswer);
+ * // and then
+ * QuizManager.removeLastQuestion();
+ * // or
+ * QuizManager.reshuffleLastQuestion()
+ *
+ * hasQuestions() and setQuestions() can always be called, the other methods will throw a
+ * noMoreQuestions RuntimeException when there are no questions left.
+ */
 public class QuizManager{
     private static ArrayList<QuestionContainer> QUESTIONS = new ArrayList<>();
     private static ArrayList<Integer> unansweredQuestions = new ArrayList<>();  // with indexes from QUESTIONS
 
-    public static void setQUESTIONS(ArrayList<QuestionContainer> questions) {
+    public static boolean hasQuestions(){
+        return !unansweredQuestions.isEmpty();
+    }
+
+    public static void setQuestions(ArrayList<QuestionContainer> questions) {
         QUESTIONS = questions;
         unansweredQuestions = new ArrayList<>();
 
@@ -18,7 +43,7 @@ public class QuizManager{
         Collections.shuffle(unansweredQuestions);
     }
 
-    public static QuestionContainer getQuestion() throws NoMoreQuestions {
+    public static QuestionContainer getQuestionContainer() throws NoMoreQuestions {
         if (unansweredQuestions.isEmpty()) {
             throw new NoMoreQuestions();
         }
@@ -27,6 +52,13 @@ public class QuizManager{
         return QUESTIONS.get(questionIndex);
     }
 
+    /**
+     * Compares an answer String to the actual answer of the most recent QuestionContainer
+     *
+     * @param userAnswer a String with the answer that needs to be checked
+     * @return true if the answer is correct, false if the answer is wrong
+     * @throws NoMoreQuestions when QuizContainer has no more questions
+     */
     public static boolean checkAnswer(String userAnswer) throws NoMoreQuestions {
         if (unansweredQuestions.isEmpty()) {
             throw new NoMoreQuestions();
@@ -65,10 +97,6 @@ public class QuizManager{
         } else {
             unansweredQuestions.add(0, lastQuestion);
         }
-    }
-
-    public static boolean hasQuestions(){
-        return !unansweredQuestions.isEmpty();
     }
 
     public static class NoMoreQuestions extends RuntimeException {

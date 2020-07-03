@@ -28,7 +28,7 @@ public class TestFullQuestionContainer {
 
     @BeforeEach
     void initQuizManager() {
-        QuizManager.setQUESTIONS(QUESTIONS);
+        QuizManager.setQuestions(QUESTIONS);
     }
 
     @Test
@@ -37,16 +37,16 @@ public class TestFullQuestionContainer {
         // WHEN new questions are set
         ArrayList<QuestionContainer> questions = new ArrayList<>();
         questions.add(new QuestionContainer("new q 1", "new a 1"));
-        QuizManager.setQUESTIONS(questions);
+        QuizManager.setQuestions(questions);
         // THEN only the new questions should be present
-        assertEquals(QuizManager.getQuestion(), questions.get(0));
+        assertEquals(QuizManager.getQuestionContainer(), questions.get(0));
         QuizManager.removeLastQuestion();
         assertFalse(QuizManager.hasQuestions());
     }
 
     @Test
     void getQuestionReturnsQuestion() {
-        QuestionContainer question =  QuizManager.getQuestion();
+        QuestionContainer question =  QuizManager.getQuestionContainer();
         assertTrue(QUESTIONS.contains(question));
     }
 
@@ -54,7 +54,7 @@ public class TestFullQuestionContainer {
     void checkAnswerCorrectAnswerReturnsTrue() {
         // GIVEN QuizManager with questions
         // WHEN using the correct answer String
-        String correctAnswer = QuizManager.getQuestion().getAnswer();
+        String correctAnswer = QuizManager.getQuestionContainer().getAnswer();
         // THEN checkAnswer() should return true
         assertTrue(QuizManager.checkAnswer(correctAnswer));
     }
@@ -83,10 +83,10 @@ public class TestFullQuestionContainer {
     void removeLastQuestionChangesQuestion() {
         // GIVEN QuizManager with questions
         // WHEN one questions is queried and then removed
-        QuestionContainer firstQuestion = QuizManager.getQuestion();
+        QuestionContainer firstQuestion = QuizManager.getQuestionContainer();
         QuizManager.removeLastQuestion();
         // THEN the next call to getQuestion() should return a different question
-        QuestionContainer secondQuestion = QuizManager.getQuestion();
+        QuestionContainer secondQuestion = QuizManager.getQuestionContainer();
         assertNotEquals(firstQuestion, secondQuestion);
     }
 
@@ -100,10 +100,10 @@ public class TestFullQuestionContainer {
     void reshuffleLastQuestionShuffles() {
         // GIVEN QuizManager with questions
         // WHEN one question is queried and then reshuffled
-        QuestionContainer firstQuestion = QuizManager.getQuestion();
+        QuestionContainer firstQuestion = QuizManager.getQuestionContainer();
         QuizManager.reshuffleLastQuestion();
         // THEN the next question should be different
-        QuestionContainer secondQuestion = QuizManager.getQuestion();
+        QuestionContainer secondQuestion = QuizManager.getQuestionContainer();
         assertNotEquals(firstQuestion, secondQuestion);
     }
 

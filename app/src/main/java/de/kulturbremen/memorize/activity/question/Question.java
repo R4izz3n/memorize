@@ -21,7 +21,7 @@ public class Question extends AppCompatActivity {
         setContentView(R.layout.activity_question);
 
         // set the text of the question
-        String question = QuizManager.getQuestion().getQuestion();
+        String question = QuizManager.getQuestionContainer().getQuestion();
         TextView textView = findViewById(R.id.lastQuestionMessage);
         textView.setText(question);
 

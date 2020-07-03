@@ -25,15 +25,15 @@ public class TestEmptyQuestionContainer {
         ArrayList<QuestionContainer> questions = new ArrayList<>();
         QuestionContainer questionAdded = new QuestionContainer("new q 1", "new a 1");
         questions.add(questionAdded);
-        QuizManager.setQUESTIONS(questions);
+        QuizManager.setQuestions(questions);
         // THEN getQuestion should return a question
-        QuestionContainer questionRetrieved = QuizManager.getQuestion();
+        QuestionContainer questionRetrieved = QuizManager.getQuestionContainer();
         assertEquals(questionAdded, questionRetrieved);
     }
 
     @Test
     void getQuestionThrows() {
-        assertThrows(QuizManager.NoMoreQuestions.class, QuizManager::getQuestion);
+        assertThrows(QuizManager.NoMoreQuestions.class, QuizManager::getQuestionContainer);
     }
 
     @Test
