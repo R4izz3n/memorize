@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import de.kulturbremen.memorize.R;
 import de.kulturbremen.memorize.activity.question.Question;
-import de.kulturbremen.memorize.data;
+import de.kulturbremen.memorize.DataStub;
 import de.kulturbremen.memorize.quizmanager.QuizManager;
 
 /**
@@ -69,7 +69,7 @@ public class QuizFragment extends Fragment implements QuizRecyclerAdapter.OnQuiz
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new QuizRecyclerAdapter(data.getQuizzes(), this));
+            recyclerView.setAdapter(new QuizRecyclerAdapter(DataStub.getQuizzes(), this));
         }
         return view;
     }
