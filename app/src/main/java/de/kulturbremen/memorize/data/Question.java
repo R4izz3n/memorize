@@ -1,4 +1,4 @@
-package de.kulturbremen.memorize.models;
+package de.kulturbremen.memorize.data;
 
 import androidx.room.Entity;
 import androidx.room.Index;

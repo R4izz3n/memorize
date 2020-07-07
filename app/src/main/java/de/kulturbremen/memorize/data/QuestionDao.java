@@ -1,4 +1,4 @@
-package de.kulturbremen.memorize.persistence;
+package de.kulturbremen.memorize.data;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -7,8 +7,6 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import java.util.List;
-
-import de.kulturbremen.memorize.models.Question;
 
 @Dao
 public interface QuestionDao {
