@@ -1,4 +1,4 @@
-package de.kulturbremen.memorize.activity.question;
+package de.kulturbremen.memorize.activities.question;
 
 import androidx.appcompat.app.AppCompatActivity;
 

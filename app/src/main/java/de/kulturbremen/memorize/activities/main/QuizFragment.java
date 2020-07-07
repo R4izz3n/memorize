@@ -1,4 +1,4 @@
-package de.kulturbremen.memorize.activity.main;
+package de.kulturbremen.memorize.activities.main;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import de.kulturbremen.memorize.R;
-import de.kulturbremen.memorize.activity.question.Question;
+import de.kulturbremen.memorize.activities.question.Question;
 import de.kulturbremen.memorize.DataStub;
 import de.kulturbremen.memorize.quizmanager.QuizManager;
 

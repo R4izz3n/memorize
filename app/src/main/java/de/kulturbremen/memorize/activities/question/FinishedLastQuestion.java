@@ -1,4 +1,4 @@
-package de.kulturbremen.memorize.activity.question;
+package de.kulturbremen.memorize.activities.question;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import de.kulturbremen.memorize.R;
-import de.kulturbremen.memorize.activity.main.MainActivity;
+import de.kulturbremen.memorize.activities.main.MainActivity;
 
 public class FinishedLastQuestion extends AppCompatActivity {
 

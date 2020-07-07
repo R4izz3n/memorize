@@ -7,7 +7,7 @@
     android:background="@color/colorPrimary"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
-    tools:context=".activity.question.FinishedLastQuestion">
+    tools:context=".activities.question.FinishedLastQuestion">
 
     <TextView
         android:id="@+id/lastQuestionMessage"

@@ -1,4 +1,4 @@
-package de.kulturbremen.memorize.activity.main;
+package de.kulturbremen.memorize.activities.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
