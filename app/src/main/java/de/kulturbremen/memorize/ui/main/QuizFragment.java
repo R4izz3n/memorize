@@ -1,4 +1,4 @@
-package de.kulturbremen.memorize.activities.main;
+package de.kulturbremen.memorize.ui.main;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,12 +16,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import de.kulturbremen.memorize.R;
-import de.kulturbremen.memorize.activities.question.Question;
+import de.kulturbremen.memorize.ui.question.QuestionActivity;
 import de.kulturbremen.memorize.DataStub;
 import de.kulturbremen.memorize.quizmanager.QuizManager;
 
 /**
- * A fragment representing a list of Quiz names.
+ * A fragment representing a list of QuizEntity names.
  */
 public class QuizFragment extends Fragment implements QuizRecyclerAdapter.OnQuizListener{
 
@@ -76,7 +76,7 @@ public class QuizFragment extends Fragment implements QuizRecyclerAdapter.OnQuiz
 
     @Override
     public void onQuizClick(int position) {
-        Intent intent = new Intent(getActivity(), Question.class);
+        Intent intent = new Intent(getActivity(), QuestionActivity.class);
         MainActivity.setTestData();
         QuizManager qm = QuizManager.getInstance();
         if (qm.hasQuestions()) {

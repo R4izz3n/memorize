@@ -11,7 +11,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import de.kulturbremen.memorize.quizmanager.QuestionContainer;
+import de.kulturbremen.memorize.data.entity.QuestionEntity;
+import de.kulturbremen.memorize.model.QuestionContainer;
 import de.kulturbremen.memorize.quizmanager.QuizManager;
 
 public class TestFullQuestionContainer {
@@ -21,9 +22,9 @@ public class TestFullQuestionContainer {
 
     public TestFullQuestionContainer() {
         ArrayList<QuestionContainer> questions = new ArrayList<>();
-        questions.add(new QuestionContainer("why?", "because"));
-        questions.add(new QuestionContainer("why2?", "because2"));
-        questions.add(new QuestionContainer("why3?", "because3"));
+        questions.add(new QuestionEntity("why?", "because", "name"));
+        questions.add(new QuestionEntity("why?2", "because2", "name"));
+        questions.add(new QuestionEntity("why?3", "because3", "name"));
         this.QUESTIONS = questions;
     }
 
@@ -34,10 +35,10 @@ public class TestFullQuestionContainer {
 
     @Test
     void setQuestionsAddsQuestions() {
-        // GIVEN that QuizManager already has questions
-        // WHEN new questions are set
+        // GIVEN that QuizManager already has questions and a new set of questions
         ArrayList<QuestionContainer> questions = new ArrayList<>();
-        questions.add(new QuestionContainer("new q 1", "new a 1"));
+        questions.add(new QuestionEntity("why?3", "because3", "name"));
+        // WHEN new questions are set
         quizManager.setQuestions(questions);
         // THEN only the new questions should be present
         assertEquals(quizManager.getQuestionContainer(), questions.get(0));

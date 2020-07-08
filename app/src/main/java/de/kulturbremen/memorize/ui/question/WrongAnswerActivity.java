@@ -1,9 +1,10 @@
-package de.kulturbremen.memorize.activities.question;
+package de.kulturbremen.memorize.ui.question;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -11,33 +12,32 @@ import java.util.TimerTask;
 import de.kulturbremen.memorize.R;
 import de.kulturbremen.memorize.quizmanager.QuizManager;
 
-public class RightAnswer extends AppCompatActivity {
+public class WrongAnswerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_right_answer);
+        setContentView(R.layout.activity_wrong_answer);
 
+        // set the text of the question
         QuizManager qm = QuizManager.getInstance();
-        qm.removeLastQuestion();
-
-        if (qm.hasQuestions()) {
-            Intent intent = new Intent(this, Question.class);
-            waitAndGoToNextIntent(intent);
-        } else {
-            Intent intent = new Intent(this, FinishedLastQuestion.class);
-            waitAndGoToNextIntent(intent);
-        }
+        String answer = qm.getQuestionContainer().getAnswer();
+        TextView textView = findViewById(R.id.correctAnswer);
+        textView.setText(answer);
+        qm.reshuffleLastQuestion();
+        waitAndGoToNextQuestion();
     }
 
-    private void waitAndGoToNextIntent(final Intent intent) {
+    private void waitAndGoToNextQuestion() {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
+                Intent intent = new Intent(WrongAnswerActivity.this, QuestionActivity.class);
                 startActivity(intent);
                 finish();
             }
-        }, 1500);
+        }, 3500);
     }
+
 }

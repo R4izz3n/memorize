@@ -4,6 +4,8 @@ import android.content.Context;
 
 import java.util.List;
 
+import de.kulturbremen.memorize.data.entity.QuizEntity;
+
 /**
  * Repository module for handling data operations.
  */
@@ -16,20 +18,20 @@ public class QuizRepository {
     }
 
 
-    public List<Quiz> getQuizzes(){
+    public List<QuizEntity> getQuizzes(){
         return appDatabase.QuizDao().getQuizzes();
     }
 
-    public void addQuiz(Quiz quiz){
-        appDatabase.QuizDao().insertQuiz(quiz);
+    public void addQuiz(QuizEntity quizEntity){
+        appDatabase.QuizDao().insertQuiz(quizEntity);
     }
 
-    public void deleteQuiz(Quiz quiz){
-        appDatabase.QuizDao().deleteQuiz(quiz);
+    public void deleteQuiz(QuizEntity quizEntity){
+        appDatabase.QuizDao().deleteQuiz(quizEntity);
     }
 
-    public void updateQuiz(Quiz quiz){
-        appDatabase.QuizDao().updateQuiz(quiz);
+    public void updateQuiz(QuizEntity quizEntity){
+        appDatabase.QuizDao().updateQuiz(quizEntity);
     }
 
 }

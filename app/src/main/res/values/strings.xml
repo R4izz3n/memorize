@@ -2,7 +2,7 @@
     <string name="app_name">memorize</string>
     <string name="example">example</string>
     <string name="checkAnswerButton">Check</string>
-    <string name="question">This is where the question will be in the future?</string>
+    <string name="questionEntity">This is where the questionEntity will be in the future?</string>
     <string name="answer">Answer Oh my answer is just as long so long is my answer so long!</string>
     <string name="questionLabel">Question:</string>
     <string name="answerLabel">Answer:</string>
@@ -12,7 +12,7 @@
     <string name="wrongAnswerMessage">Sorry, wrong answer</string>
     <string name="correctAnswerLabel">Correct answer:</string>
     <string name="sad_girl">sad girl</string>
-    <string name="last_question_message">You answered all the questions</string>
+    <string name="last_question_message">You answered all the questionContainers</string>
     <string name="well_done">Well Done!</string>
     <string name="return_message">Return</string>
     <string name="question_icon">Question Icon</string>

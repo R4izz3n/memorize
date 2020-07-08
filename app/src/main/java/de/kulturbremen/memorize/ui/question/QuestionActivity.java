@@ -1,4 +1,4 @@
-package de.kulturbremen.memorize.activities.question;
+package de.kulturbremen.memorize.ui.question;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,7 +12,7 @@ import android.widget.TextView;
 import de.kulturbremen.memorize.R;
 import de.kulturbremen.memorize.quizmanager.QuizManager;
 
-public class Question extends AppCompatActivity {
+public class QuestionActivity extends AppCompatActivity {
     public static final String EXTRA_USER_ANSWER = "de.kulturbremen.memorize.USER_ANSWER";
 
     @Override
@@ -38,9 +38,9 @@ public class Question extends AppCompatActivity {
         QuizManager qm = QuizManager.getInstance();
 
         if (qm.checkAnswer(userAnswer)){
-            intent = new Intent(this, RightAnswer.class);
+            intent = new Intent(this, RightAnswerActivity.class);
         } else {
-            intent = new Intent(this, WrongAnswer.class);
+            intent = new Intent(this, WrongAnswerActivity.class);
         }
         startActivity(intent);
     }

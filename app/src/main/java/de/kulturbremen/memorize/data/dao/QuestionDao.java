@@ -1,0 +1,29 @@
+package de.kulturbremen.memorize.data.dao;
+
+import androidx.room.Dao;
+import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.Query;
+import androidx.room.Update;
+
+import java.util.List;
+
+import de.kulturbremen.memorize.data.entity.QuestionEntity;
+
+@Dao
+public interface QuestionDao {
+    @Query("SELECT * FROM QuestionEntity WHERE quiz = :quiz")
+    List<QuestionEntity> getQuestions(String quiz);
+
+    @Query("SELECT * FROM QuestionEntity WHERE id = :id")
+    QuestionEntity getQuestionById(int id);
+
+    @Insert
+    void insertQuestion(QuestionEntity questionEntity);
+
+    @Update
+    void updateQuestion(QuestionEntity questionEntity);
+
+    @Delete
+    void deleteQuestion(QuestionEntity questionEntity);
+}

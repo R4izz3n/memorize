@@ -1,4 +1,4 @@
-package de.kulturbremen.memorize.activities.main;
+package de.kulturbremen.memorize.ui.main;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,7 +13,7 @@ import de.kulturbremen.memorize.R;
 import java.util.ArrayList;
 
 /**
- * {@link RecyclerView.Adapter} that can display a list of strings with Quiz names.
+ * {@link RecyclerView.Adapter} that can display a list of strings with QuizEntity names.
  */
 public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapter.ViewHolder> {
 

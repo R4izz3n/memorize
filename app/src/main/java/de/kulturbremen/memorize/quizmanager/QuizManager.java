@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import de.kulturbremen.memorize.model.QuestionContainer;
+
 
 /**
  * A singleton class that holds QuestionContainers
@@ -44,8 +46,8 @@ public class QuizManager{
         return !unansweredQuestions.isEmpty();
     }
 
-    public void setQuestions(ArrayList<QuestionContainer> questions) {
-        QUESTIONS = questions;
+    public void setQuestions(ArrayList<QuestionContainer> questionContainers) {
+        QUESTIONS = questionContainers;
         unansweredQuestions = new ArrayList<>();
 
         for (int i = 0; i < QUESTIONS.size(); i++){

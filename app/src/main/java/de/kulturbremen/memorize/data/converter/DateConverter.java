@@ -1,11 +1,11 @@
-package de.kulturbremen.memorize.data;
+package de.kulturbremen.memorize.data.converter;
 
 import androidx.room.TypeConverter;
 import static java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME;
 
 import java.time.ZonedDateTime;
 
-public class Converters {
+public class DateConverter {
     @TypeConverter
     public ZonedDateTime StringToZonedDateTime(String date) {
         return ZonedDateTime.parse(date);

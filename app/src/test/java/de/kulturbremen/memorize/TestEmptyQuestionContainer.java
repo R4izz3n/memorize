@@ -8,7 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 
-import de.kulturbremen.memorize.quizmanager.QuestionContainer;
+import de.kulturbremen.memorize.data.entity.QuestionEntity;
+import de.kulturbremen.memorize.model.QuestionContainer;
 import de.kulturbremen.memorize.quizmanager.QuizManager;
 
 public class TestEmptyQuestionContainer {
@@ -22,10 +23,11 @@ public class TestEmptyQuestionContainer {
 
     @Test
     void setQuestionsAddsQuestions() {
-        // GIVEN an empty QuizManager
+        // GIVEN an empty QuizManager and a QuestionContainer
+        QuestionContainer questionAdded = new QuestionEntity("what?", "so",
+                "quizname");
         // WHEN new questions are added
         ArrayList<QuestionContainer> questions = new ArrayList<>();
-        QuestionContainer questionAdded = new QuestionContainer("new q 1", "new a 1");
         questions.add(questionAdded);
         quizManager.setQuestions(questions);
         // THEN getQuestion should return a question

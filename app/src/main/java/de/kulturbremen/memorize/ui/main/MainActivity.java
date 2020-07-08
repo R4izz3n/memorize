@@ -1,11 +1,14 @@
-package de.kulturbremen.memorize.activities.main;
+package de.kulturbremen.memorize.ui.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
-import de.kulturbremen.memorize.quizmanager.QuestionContainer;
+import de.kulturbremen.memorize.data.entity.QuestionEntity;
+import de.kulturbremen.memorize.model.QuestionContainer;
 import de.kulturbremen.memorize.quizmanager.QuizManager;
 import de.kulturbremen.memorize.R;
 
@@ -20,10 +23,11 @@ public class MainActivity extends AppCompatActivity {
 
     public static void setTestData(){
         ArrayList<QuestionContainer> questions = new ArrayList<>();
-        questions.add(new QuestionContainer("nee", "nein"));
-        questions.add(new QuestionContainer("boek", "Buch"));
-        questions.add(new QuestionContainer("boom", "Baum"));
-        questions.add(new QuestionContainer("tv kijken", "fernsehen"));
+        ZonedDateTime dateTime = ZonedDateTime.now();
+        questions.add(new QuestionEntity("nee", "nein", "name"));
+        questions.add(new QuestionEntity("boek", "Buch", "name"));
+        questions.add(new QuestionEntity("boom", "Baum", "name"));
+        questions.add(new QuestionEntity("tv kijken", "fernsehen", "name"));
         QuizManager qm = QuizManager.getInstance();
         qm.setQuestions(questions);
     }

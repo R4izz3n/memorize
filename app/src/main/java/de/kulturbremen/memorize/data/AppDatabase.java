@@ -5,8 +5,16 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
-@Database(entities = {Quiz.class, Question.class}, version = 1)
+import de.kulturbremen.memorize.data.converter.DateConverter;
+import de.kulturbremen.memorize.data.dao.QuestionDao;
+import de.kulturbremen.memorize.data.dao.QuizDao;
+import de.kulturbremen.memorize.data.entity.QuestionEntity;
+import de.kulturbremen.memorize.data.entity.QuizEntity;
+
+@Database(entities = {QuizEntity.class, QuestionEntity.class}, version = 1)
+@TypeConverters({DateConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
     public abstract QuizDao QuizDao();
     public abstract QuestionDao QuestionDao();

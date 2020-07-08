@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
-    tools:context=".activities.question.RightAnswer">
+    tools:context=".ui.questionEntity.RightAnswerActivity">
 
     <ImageView
         android:id="@+id/imageView2"
