@@ -10,9 +10,10 @@ import java.time.ZonedDateTime;
 import de.kulturbremen.memorize.model.Quiz;
 
 
-@Entity(indices = {@Index("dateLastAltered")})
+@Entity(indices = {@Index("dateLastAltered"), @Index("name")})
 public class QuizEntity implements Quiz {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    private int id;
     @NonNull
     private String name;
     @NonNull
@@ -21,6 +22,7 @@ public class QuizEntity implements Quiz {
     private ZonedDateTime dateLastAltered;
 
     public QuizEntity(QuizEntity quizEntity) {
+        this.id = quizEntity.getId();
         this.name = quizEntity.getName();
         this.creationDate = quizEntity.getCreationDate();
         this.dateLastAltered = quizEntity.getDateLastAltered();
@@ -30,6 +32,14 @@ public class QuizEntity implements Quiz {
         this.name = name;
         this.creationDate = ZonedDateTime.now();
         this.dateLastAltered = ZonedDateTime.now();
+    }
+
+    public int getId(){
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @NonNull

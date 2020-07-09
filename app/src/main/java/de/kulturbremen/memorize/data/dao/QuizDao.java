@@ -15,8 +15,11 @@ public interface QuizDao {
     @Query("SELECT * FROM QuizEntity ORDER BY dateLastAltered DESC")
     List<QuizEntity> getQuizzes();
 
+    @Query("SELECT * FROM QuizEntity WHERE id = :id")
+    QuizEntity getQuizById(long id);
+
     @Insert
-    void insertQuiz(QuizEntity quizEntity);
+    long insertQuiz(QuizEntity quizEntity);
 
     @Update
     void updateQuiz(QuizEntity quizEntity);

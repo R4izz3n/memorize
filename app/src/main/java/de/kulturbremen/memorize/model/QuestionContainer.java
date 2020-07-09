@@ -7,5 +7,5 @@ public interface QuestionContainer {
     String getQuestion();
     String getAnswer();
     ZonedDateTime getCreationDate();
-    String getQuiz();
+    String getQuizId();
 }

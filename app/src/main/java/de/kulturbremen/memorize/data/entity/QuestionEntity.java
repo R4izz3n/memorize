@@ -9,7 +9,7 @@ import java.time.ZonedDateTime;
 
 import de.kulturbremen.memorize.model.QuestionContainer;
 
-@Entity(indices = {@Index("quiz")})
+@Entity(indices = {@Index("quizId")})
 public class QuestionEntity implements QuestionContainer {
     @PrimaryKey(autoGenerate = true)
     private int id;
@@ -20,22 +20,22 @@ public class QuestionEntity implements QuestionContainer {
     @NonNull
     private ZonedDateTime creationDate;
     @NonNull
-    private String quiz;
+    private String quizId;
 
     public QuestionEntity(QuestionContainer questionContainer) {
         this.id = questionContainer.getId();
         this.question = questionContainer.getQuestion();
         this.answer = questionContainer.getAnswer();
         this.creationDate = questionContainer.getCreationDate();
-        this.quiz = questionContainer.getQuiz();
+        this.quizId = questionContainer.getQuizId();
     }
 
     public QuestionEntity(@NonNull String question, @NonNull String answer,
-                          @NonNull String quiz) {
+                          @NonNull String quizId) {
         this.question = question;
         this.answer = answer;
         this.creationDate = ZonedDateTime.now();
-        this.quiz = quiz;
+        this.quizId = quizId;
     }
 
     @Override
@@ -78,11 +78,11 @@ public class QuestionEntity implements QuestionContainer {
     }
     @NonNull
     @Override
-    public String getQuiz() {
-        return quiz;
+    public String getQuizId() {
+        return quizId;
     }
 
-    public void setQuiz(@NonNull String quiz) {
-        this.quiz = quiz;
+    public void setQuizId(@NonNull String quizId) {
+        this.quizId = quizId;
     }
 }

@@ -12,14 +12,14 @@ import de.kulturbremen.memorize.data.entity.QuestionEntity;
 
 @Dao
 public interface QuestionDao {
-    @Query("SELECT * FROM QuestionEntity WHERE quiz = :quiz")
+    @Query("SELECT * FROM QuestionEntity WHERE quizId = :quiz")
     List<QuestionEntity> getQuestions(String quiz);
 
     @Query("SELECT * FROM QuestionEntity WHERE id = :id")
-    QuestionEntity getQuestionById(int id);
+    QuestionEntity getQuestionById(long id);
 
     @Insert
-    void insertQuestion(QuestionEntity questionEntity);
+    long insertQuestion(QuestionEntity questionEntity);
 
     @Update
     void updateQuestion(QuestionEntity questionEntity);
