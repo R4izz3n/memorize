@@ -12,7 +12,7 @@
     <string name="wrongAnswerMessage">Sorry, wrong answer</string>
     <string name="correctAnswerLabel">Correct answer:</string>
     <string name="sad_girl">sad girl</string>
-    <string name="last_question_message">You answered all the questionContainers</string>
+    <string name="last_question_message">You answered all the questions</string>
     <string name="well_done">Well Done!</string>
     <string name="return_message">Return</string>
     <string name="question_icon">Question Icon</string>
