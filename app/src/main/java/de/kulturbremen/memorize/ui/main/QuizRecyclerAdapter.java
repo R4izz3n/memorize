@@ -3,25 +3,29 @@ package de.kulturbremen.memorize.ui.main;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import de.kulturbremen.memorize.R;
+import de.kulturbremen.memorize.model.QuizEntity;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a list of strings with QuizEntity names.
  */
 public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapter.ViewHolder> {
 
-    private final ArrayList<String> mQuizzes;
+    private static final String TAG = "QuizRecyclerAdapter";
+    private final List<QuizEntity> mQuizzes;
     private OnQuizListener mOnQuizListener;
 
-    public QuizRecyclerAdapter(ArrayList<String> items, OnQuizListener onQuizListener) {
+    public QuizRecyclerAdapter(List<QuizEntity> items, OnQuizListener onQuizListener) {
         this.mQuizzes = items;
+        Log.d(TAG, "QuizRecyclerAdapter: mQuizzes: " + items);
         this.mOnQuizListener = onQuizListener;
     }
 
@@ -35,8 +39,8 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mQuizzes.get(position);
-        holder.mContentView.setText(mQuizzes.get(position));
+        holder.mItem = mQuizzes.get(position).getName();
+        holder.mContentView.setText(mQuizzes.get(position).getName());
     }
 
     @Override
@@ -45,6 +49,7 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private static final String TAG = "ViewHolder";
         public final View mView;
         public final TextView mContentView;
         public String mItem;
@@ -53,6 +58,7 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
         public ViewHolder(View view, OnQuizListener onQuizListener) {
             super(view);
             mView = view;
+            Log.d(TAG, "ViewHolder: constructor called with view: " + view);
             mContentView = view.findViewById(R.id.content);
             this.onQuizListener = onQuizListener;
 
@@ -66,11 +72,12 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
 
         @Override
         public void onClick(View view) {
-            onQuizListener.onQuizClick(getAdapterPosition());
+            QuizEntity quiz = mQuizzes.get(getAdapterPosition());
+            onQuizListener.onQuizClick(quiz);
         }
     }
 
     public interface OnQuizListener {
-        void onQuizClick(int position);
+        void onQuizClick(QuizEntity quiz);
     }
 }

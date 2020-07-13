@@ -9,16 +9,16 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import de.kulturbremen.memorize.R;
-import de.kulturbremen.memorize.ui.question.QuestionActivity;
-import de.kulturbremen.memorize.DataStub;
+import de.kulturbremen.memorize.model.QuizEntity;
+import de.kulturbremen.memorize.quizmanager.QuestionManager;
 import de.kulturbremen.memorize.quizmanager.QuizManager;
+import de.kulturbremen.memorize.ui.question.QuestionActivity;
 
 /**
  * A fragment representing a list of QuizEntity names.
@@ -63,24 +63,24 @@ public class QuizFragment extends Fragment implements QuizRecyclerAdapter.OnQuiz
         // Set the adapter
         if (view instanceof RecyclerView) {
             context = view.getContext();
+            QuizManager quizManager = new QuizManager(context);
             RecyclerView recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new QuizRecyclerAdapter(DataStub.getQuizzes(), this));
+            recyclerView.setAdapter(new QuizRecyclerAdapter(quizManager.getQuizzes(), this));
         }
         return view;
     }
 
     @Override
-    public void onQuizClick(int position) {
+    public void onQuizClick(QuizEntity quiz) {
         Intent intent = new Intent(getActivity(), QuestionActivity.class);
-        MainActivity.setTestData();
-        QuizManager qm = QuizManager.getInstance();
+        QuestionManager qm = QuestionManager.getInstance();
+        qm.setQuestions(quiz, getContext());
         if (qm.hasQuestions()) {
-            Log.d(TAG, "onQuizClick: " + position);
             startActivity(intent);
         } else {
             int duration = Toast.LENGTH_SHORT;

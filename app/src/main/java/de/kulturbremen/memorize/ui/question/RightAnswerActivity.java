@@ -9,7 +9,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import de.kulturbremen.memorize.R;
-import de.kulturbremen.memorize.quizmanager.QuizManager;
+import de.kulturbremen.memorize.quizmanager.QuestionManager;
 
 public class RightAnswerActivity extends AppCompatActivity {
 
@@ -18,7 +18,7 @@ public class RightAnswerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_right_answer);
 
-        QuizManager qm = QuizManager.getInstance();
+        QuestionManager qm = QuestionManager.getInstance();
         qm.removeLastQuestion();
 
         if (qm.hasQuestions()) {
