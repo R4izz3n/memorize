@@ -1,4 +1,4 @@
-package de.kulturbremen.memorize;
+package de.kulturbremen.memorize.data;
 
 import android.content.Context;
 
@@ -13,9 +13,9 @@ import org.junit.runner.RunWith;
 
 import java.util.List;
 
-import de.kulturbremen.memorize.data.AppDatabase;
-import de.kulturbremen.memorize.data.dao.QuizDao;
-import de.kulturbremen.memorize.data.entity.QuizEntity;
+import de.kulturbremen.memorize.persistence.AppDatabase;
+import de.kulturbremen.memorize.persistence.dao.QuizDao;
+import de.kulturbremen.memorize.model.QuizEntity;
 
 import static org.junit.Assert.assertEquals;
 

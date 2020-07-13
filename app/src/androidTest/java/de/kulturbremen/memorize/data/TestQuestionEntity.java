@@ -1,4 +1,4 @@
-package de.kulturbremen.memorize;
+package de.kulturbremen.memorize.data;
 
 import android.content.Context;
 
@@ -14,16 +14,16 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import de.kulturbremen.memorize.data.AppDatabase;
-import de.kulturbremen.memorize.data.dao.QuestionDao;
-import de.kulturbremen.memorize.data.entity.QuestionEntity;
+import de.kulturbremen.memorize.persistence.AppDatabase;
+import de.kulturbremen.memorize.persistence.dao.QuestionDao;
+import de.kulturbremen.memorize.model.QuestionEntity;
 
 @RunWith(AndroidJUnit4.class)
 public class TestQuestionEntity {
     private QuestionDao questionDao;
     private AppDatabase db;
     private QuestionEntity testQuestion = new QuestionEntity(
-            "why?", "that's why", "quizname");
+            "why?", "that's why", 1);
 
     @Before
     public void createDb() {
@@ -40,7 +40,7 @@ public class TestQuestionEntity {
     @Test
     public void addAndGetQuestion() {
         questionDao.insertQuestion(testQuestion);
-        List<QuestionEntity> questions = questionDao.getQuestions(testQuestion.getQuizId());
+        List<QuestionEntity> questions = questionDao.getQuestionsByQuizId(testQuestion.getQuizId());
         assertEquals(testQuestion.getAnswer(), questions.get(0).getAnswer());
     }
 
@@ -77,7 +77,7 @@ public class TestQuestionEntity {
         QuestionEntity question = questionDao.getQuestionById(id);
         questionDao.deleteQuestion(question);
         // THEN that question should no longer be there
-        List<QuestionEntity> questions = questionDao.getQuestions(testQuestion.getQuizId());
+        List<QuestionEntity> questions = questionDao.getQuestionsByQuizId(testQuestion.getQuizId());
         assertEquals(0, questions.size());
     }
 

@@ -1,4 +1,4 @@
-package de.kulturbremen.memorize.data.dao;
+package de.kulturbremen.memorize.persistence.dao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -8,7 +8,7 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import de.kulturbremen.memorize.data.entity.QuizEntity;
+import de.kulturbremen.memorize.model.QuizEntity;
 
 @Dao
 public interface QuizDao {
@@ -17,6 +17,9 @@ public interface QuizDao {
 
     @Query("SELECT * FROM QuizEntity WHERE id = :id")
     QuizEntity getQuizById(long id);
+
+    @Query("SELECT COUNT(id) FROM QuizEntity")
+    int debug_all();
 
     @Insert
     long insertQuiz(QuizEntity quizEntity);

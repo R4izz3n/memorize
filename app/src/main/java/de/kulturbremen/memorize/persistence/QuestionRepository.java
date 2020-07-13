@@ -1,17 +1,17 @@
-package de.kulturbremen.memorize.data;
+package de.kulturbremen.memorize.persistence;
 
 import android.content.Context;
 
 import java.util.List;
 
-import de.kulturbremen.memorize.data.entity.QuestionEntity;
-import de.kulturbremen.memorize.data.entity.QuizEntity;
+import de.kulturbremen.memorize.model.QuestionEntity;
+import de.kulturbremen.memorize.model.QuizEntity;
 
 /**
  * Repository module for handling data operations.
  */
 public class QuestionRepository {
-
+    public static final String TAG = "QuestionRepository";
     private AppDatabase appDatabase;
 
     public QuestionRepository(Context context) {
@@ -19,8 +19,8 @@ public class QuestionRepository {
     }
 
     public List<QuestionEntity> getQuestions(QuizEntity quizEntity){
-        String quizName = quizEntity.getName();
-        return appDatabase.QuestionDao().getQuestions(quizName);
+        int quizId = quizEntity.getId();
+        return appDatabase.QuestionDao().getQuestionsByQuizId(quizId);
     }
 
     public void addQuestion(QuestionEntity questionEntity) {

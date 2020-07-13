@@ -1,4 +1,4 @@
-package de.kulturbremen.memorize.data.entity;
+package de.kulturbremen.memorize.model;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
@@ -7,10 +7,8 @@ import androidx.room.PrimaryKey;
 
 import java.time.ZonedDateTime;
 
-import de.kulturbremen.memorize.model.QuestionContainer;
-
 @Entity(indices = {@Index("quizId")})
-public class QuestionEntity implements QuestionContainer {
+public class QuestionEntity {
     @PrimaryKey(autoGenerate = true)
     private int id;
     @NonNull
@@ -20,25 +18,24 @@ public class QuestionEntity implements QuestionContainer {
     @NonNull
     private ZonedDateTime creationDate;
     @NonNull
-    private String quizId;
+    private Integer quizId;
 
-    public QuestionEntity(QuestionContainer questionContainer) {
-        this.id = questionContainer.getId();
-        this.question = questionContainer.getQuestion();
-        this.answer = questionContainer.getAnswer();
-        this.creationDate = questionContainer.getCreationDate();
-        this.quizId = questionContainer.getQuizId();
+    public QuestionEntity(QuestionEntity questionEntity) {
+        this.id = questionEntity.getId();
+        this.question = questionEntity.getQuestion();
+        this.answer = questionEntity.getAnswer();
+        this.creationDate = questionEntity.getCreationDate();
+        this.quizId = questionEntity.getQuizId();
     }
 
     public QuestionEntity(@NonNull String question, @NonNull String answer,
-                          @NonNull String quizId) {
+                          @NonNull Integer quizId) {
         this.question = question;
         this.answer = answer;
         this.creationDate = ZonedDateTime.now();
         this.quizId = quizId;
     }
 
-    @Override
     public int getId() {
         return id;
     }
@@ -48,7 +45,6 @@ public class QuestionEntity implements QuestionContainer {
     }
 
     @NonNull
-    @Override
     public String getQuestion() {
         return question;
     }
@@ -58,7 +54,6 @@ public class QuestionEntity implements QuestionContainer {
     }
 
     @NonNull
-    @Override
     public String getAnswer() {
         return answer;
     }
@@ -68,7 +63,6 @@ public class QuestionEntity implements QuestionContainer {
     }
 
     @NonNull
-    @Override
     public ZonedDateTime getCreationDate() {
         return creationDate;
     }
@@ -77,12 +71,11 @@ public class QuestionEntity implements QuestionContainer {
         this.creationDate = creationDate;
     }
     @NonNull
-    @Override
-    public String getQuizId() {
+    public Integer getQuizId() {
         return quizId;
     }
 
-    public void setQuizId(@NonNull String quizId) {
+    public void setQuizId(@NonNull Integer quizId) {
         this.quizId = quizId;
     }
 }

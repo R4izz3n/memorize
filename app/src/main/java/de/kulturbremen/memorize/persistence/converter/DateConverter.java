@@ -1,4 +1,4 @@
-package de.kulturbremen.memorize.data.converter;
+package de.kulturbremen.memorize.persistence.converter;
 
 import androidx.room.TypeConverter;
 import static java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME;

@@ -1,4 +1,4 @@
-package de.kulturbremen.memorize.data.entity;
+package de.kulturbremen.memorize.model;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
@@ -7,11 +7,8 @@ import androidx.room.PrimaryKey;
 
 import java.time.ZonedDateTime;
 
-import de.kulturbremen.memorize.model.Quiz;
-
-
-@Entity(indices = {@Index("dateLastAltered"), @Index("name")})
-public class QuizEntity implements Quiz {
+@Entity(indices = {@Index("name")})
+public class QuizEntity {
     @PrimaryKey(autoGenerate = true)
     private int id;
     @NonNull
@@ -43,7 +40,6 @@ public class QuizEntity implements Quiz {
     }
 
     @NonNull
-    @Override
     public String getName() {
         return name;
     }
@@ -53,7 +49,6 @@ public class QuizEntity implements Quiz {
     }
 
     @NonNull
-    @Override
     public ZonedDateTime getCreationDate() {
         return creationDate;
     }
@@ -63,7 +58,6 @@ public class QuizEntity implements Quiz {
     }
 
     @NonNull
-    @Override
     public ZonedDateTime getDateLastAltered() {
         return dateLastAltered;
     }
