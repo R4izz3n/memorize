@@ -9,16 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.questionEntity.FinishedLastQuestion"
+        <activity android:name=".ui.question.FinishedLastQuestion"
                   android:parentActivityName=".ui.main.MainActivity" />
         <activity
-            android:name=".ui.questionEntity.RightAnswerActivity"
+            android:name=".ui.question.RightAnswerActivity"
             android:parentActivityName=".ui.main.MainActivity" />
         <activity
-            android:name=".ui.questionEntity.WrongAnswerActivity"
+            android:name=".ui.question.WrongAnswerActivity"
             android:parentActivityName=".ui.main.MainActivity" />
         <activity
-            android:name=".ui.questionEntity.QuestionActivity"
+            android:name=".ui.question.QuestionActivity"
             android:parentActivityName=".ui.main.MainActivity" />
         <activity android:name=".ui.main.MainActivity">
             <intent-filter>
