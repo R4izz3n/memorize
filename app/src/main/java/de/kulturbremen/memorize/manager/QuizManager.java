@@ -1,4 +1,4 @@
-package de.kulturbremen.memorize.quizmanager;
+package de.kulturbremen.memorize.manager;
 
 import android.content.Context;
 

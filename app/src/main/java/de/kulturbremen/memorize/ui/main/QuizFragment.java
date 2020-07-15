@@ -16,8 +16,8 @@ import android.widget.Toast;
 
 import de.kulturbremen.memorize.R;
 import de.kulturbremen.memorize.model.QuizEntity;
-import de.kulturbremen.memorize.quizmanager.QuestionManager;
-import de.kulturbremen.memorize.quizmanager.QuizManager;
+import de.kulturbremen.memorize.manager.QuestionManager;
+import de.kulturbremen.memorize.manager.QuizManager;
 import de.kulturbremen.memorize.ui.question.QuestionActivity;
 
 /**
@@ -79,7 +79,7 @@ public class QuizFragment extends Fragment implements QuizRecyclerAdapter.OnQuiz
     public void onQuizClick(QuizEntity quiz) {
         Intent intent = new Intent(getActivity(), QuestionActivity.class);
         QuestionManager qm = QuestionManager.getInstance();
-        qm.setQuestions(quiz, getContext());
+        qm.updateQuestions(quiz, getContext());
         if (qm.hasQuestions()) {
             startActivity(intent);
         } else {

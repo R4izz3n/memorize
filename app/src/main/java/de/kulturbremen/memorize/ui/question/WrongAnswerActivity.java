@@ -10,7 +10,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import de.kulturbremen.memorize.R;
-import de.kulturbremen.memorize.quizmanager.QuestionManager;
+import de.kulturbremen.memorize.manager.QuestionManager;
 
 public class WrongAnswerActivity extends AppCompatActivity {
 

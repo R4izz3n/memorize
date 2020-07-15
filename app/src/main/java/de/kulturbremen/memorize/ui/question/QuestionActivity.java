@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import de.kulturbremen.memorize.R;
-import de.kulturbremen.memorize.quizmanager.QuestionManager;
+import de.kulturbremen.memorize.manager.QuestionManager;
 
 public class QuestionActivity extends AppCompatActivity {
     public static final String EXTRA_USER_ANSWER = "de.kulturbremen.memorize.USER_ANSWER";

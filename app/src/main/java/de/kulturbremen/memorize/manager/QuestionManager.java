@@ -1,7 +1,6 @@
-package de.kulturbremen.memorize.quizmanager;
+package de.kulturbremen.memorize.manager;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,8 +36,8 @@ import de.kulturbremen.memorize.model.QuizEntity;
 public class QuestionManager {
     private static final String TAG = "QuestionManager";
     private static QuestionManager instance = new QuestionManager();
-    private static List<QuestionEntity> questions = new ArrayList<>();
-    private static ArrayList<Integer> unansweredQuestions = new ArrayList<>();  // with indexes from QUESTIONS
+    private List<QuestionEntity> questions = new ArrayList<>();
+    private ArrayList<Integer> unansweredQuestions = new ArrayList<>();  // with indexes from QUESTIONS
 
     /**
      * private constructor so it cannot be instantiated
@@ -53,10 +52,13 @@ public class QuestionManager {
         return !unansweredQuestions.isEmpty();
     }
 
-    public void setQuestions(QuizEntity quiz, Context context) {
+    public void updateQuestions(QuizEntity quiz, Context context) {
         QuestionRepository questionRepository = new QuestionRepository(context);
         questions = questionRepository.getQuestions(quiz);
-        Log.d(TAG, "setQuestions: Questions: " + questions);
+        setUnansweredQuestions();
+    }
+
+    private void setUnansweredQuestions() {
         unansweredQuestions = new ArrayList<>();
 
 
@@ -64,7 +66,11 @@ public class QuestionManager {
             unansweredQuestions.add(i);
         }
         Collections.shuffle(unansweredQuestions);
-        Log.d(TAG, "setQuestions: unanswered questions: " + unansweredQuestions);
+    }
+
+    public void setQuestions(List<QuestionEntity> questions) {
+        this.questions = questions;
+        setUnansweredQuestions();
     }
 
     public QuestionEntity getQuestionEntity() throws NoMoreQuestions {
