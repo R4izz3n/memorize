@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,10 +24,11 @@ import de.kulturbremen.memorize.ui.question.QuestionActivity;
 /**
  * A fragment representing a list of QuizEntity names.
  */
-public class QuizFragment extends Fragment implements QuizRecyclerAdapter.OnQuizListener{
+public class QuizFragment extends Fragment
+        implements QuizRecyclerAdapter.OnQuizListener, QuizRecyclerAdapter.OnEditQuizListener {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
-    private int mColumnCount = 1;
+    private int columnCount = 1;
     private static final String TAG = "QuizFragment";
     private Context context;
 
@@ -51,7 +53,7 @@ public class QuizFragment extends Fragment implements QuizRecyclerAdapter.OnQuiz
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            columnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
     }
 
@@ -65,12 +67,13 @@ public class QuizFragment extends Fragment implements QuizRecyclerAdapter.OnQuiz
             context = view.getContext();
             QuizManager quizManager = new QuizManager(context);
             RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
+            if (columnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+                recyclerView.setLayoutManager(new GridLayoutManager(context, columnCount));
             }
-            recyclerView.setAdapter(new QuizRecyclerAdapter(quizManager.getQuizzes(), this));
+            recyclerView.setAdapter(new QuizRecyclerAdapter(quizManager.getQuizzes(),
+                    this, this));
         }
         return view;
     }
@@ -88,5 +91,10 @@ public class QuizFragment extends Fragment implements QuizRecyclerAdapter.OnQuiz
             Toast toast = Toast.makeText(context, message, duration);
             toast.show();
         }
+    }
+
+    @Override
+    public void onEditQuizClick(QuizEntity quiz) {
+        Log.d(TAG, "onEditQuizClick: clicked! (" + quiz + ")");
     }
 }

@@ -16,4 +16,5 @@
     <string name="well_done">Well Done!</string>
     <string name="return_message">Return</string>
     <string name="question_icon">Question Icon</string>
+    <string name="edit_quiz_button">edit quiz</string>
 </resources>

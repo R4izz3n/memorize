@@ -3,10 +3,10 @@ package de.kulturbremen.memorize.ui.main;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import de.kulturbremen.memorize.R;
@@ -19,14 +19,16 @@ import java.util.List;
  */
 public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapter.ViewHolder> {
 
-    private static final String TAG = "QuizRecyclerAdapter";
-    private final List<QuizEntity> mQuizzes;
-    private OnQuizListener mOnQuizListener;
+    private final List<QuizEntity> quizzes;
+    private OnQuizListener onQuizListener;
+    private OnEditQuizListener onEditQuizListener;
 
-    public QuizRecyclerAdapter(List<QuizEntity> items, OnQuizListener onQuizListener) {
-        this.mQuizzes = items;
-        Log.d(TAG, "QuizRecyclerAdapter: mQuizzes: " + items);
-        this.mOnQuizListener = onQuizListener;
+    public QuizRecyclerAdapter(List<QuizEntity> items,
+                               OnQuizListener onQuizListener,
+                               OnEditQuizListener onEditQuizListener) {
+        this.quizzes = items;
+        this.onQuizListener = onQuizListener;
+        this.onEditQuizListener = onEditQuizListener;
     }
 
     @NonNull
@@ -34,50 +36,68 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_item, parent, false);
-        return new ViewHolder(view, mOnQuizListener);
+        return new ViewHolder(view, onQuizListener, onEditQuizListener);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mQuizzes.get(position).getName();
-        holder.mContentView.setText(mQuizzes.get(position).getName());
+        holder.item = quizzes.get(position).getName();
+        holder.contentView.setText(quizzes.get(position).getName());
     }
 
     @Override
     public int getItemCount() {
-        return mQuizzes.size();
+        return quizzes.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private static final String TAG = "ViewHolder";
-        public final View mView;
-        public final TextView mContentView;
-        public String mItem;
+        public final View view;
+        public final TextView contentView;
+        public final ImageView editButton;
+        public String item;
         OnQuizListener onQuizListener;
+        OnEditQuizListener onEditQuizListener;
 
-        public ViewHolder(View view, OnQuizListener onQuizListener) {
+        public ViewHolder(View view,
+                          OnQuizListener onQuizListener, OnEditQuizListener onEditQuizListener) {
             super(view);
-            mView = view;
-            Log.d(TAG, "ViewHolder: constructor called with view: " + view);
-            mContentView = view.findViewById(R.id.content);
-            this.onQuizListener = onQuizListener;
+            this.view = view;
+            contentView = view.findViewById(R.id.content);
+            editButton = view.findViewById(R.id.editButton);
 
-            view.setOnClickListener(this);
+            this.onQuizListener = onQuizListener;
+            this.onEditQuizListener = onEditQuizListener;
+
+            contentView.setOnClickListener(this);
+            editButton.setOnClickListener(this);
+
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + contentView.getText() + "'";
         }
 
         @Override
         public void onClick(View view) {
-            QuizEntity quiz = mQuizzes.get(getAdapterPosition());
-            onQuizListener.onQuizClick(quiz);
+            QuizEntity quiz = quizzes.get(getAdapterPosition());
+            switch (view.getId()) {
+                case R.id.content: {
+                    onQuizListener.onQuizClick(quiz);
+                    break;
+                }
+                case R.id.editButton: {
+                    onEditQuizListener.onEditQuizClick(quiz);
+                    break;
+                }
+            }
         }
     }
 
     public interface OnQuizListener {
         void onQuizClick(QuizEntity quiz);
+    }
+    public interface OnEditQuizListener {
+        void onEditQuizClick(QuizEntity quiz);
     }
 }
