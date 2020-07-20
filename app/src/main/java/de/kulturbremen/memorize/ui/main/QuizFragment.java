@@ -27,8 +27,6 @@ import de.kulturbremen.memorize.ui.question.QuestionActivity;
 public class QuizFragment extends Fragment
         implements QuizRecyclerAdapter.OnQuizListener, QuizRecyclerAdapter.OnEditQuizListener {
 
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    private int columnCount = 1;
     private static final String TAG = "QuizFragment";
     private Context context;
 
@@ -39,22 +37,9 @@ public class QuizFragment extends Fragment
     public QuizFragment() {
     }
 
-    @SuppressWarnings("unused")
-    public static QuizFragment newInstance(int columnCount) {
-        QuizFragment fragment = new QuizFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            columnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
     }
 
     @Override
@@ -67,11 +52,7 @@ public class QuizFragment extends Fragment
             context = view.getContext();
             QuizManager quizManager = new QuizManager(context);
             RecyclerView recyclerView = (RecyclerView) view;
-            if (columnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, columnCount));
-            }
+            recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.setAdapter(new QuizRecyclerAdapter(quizManager.getQuizzes(),
                     this, this));
         }
