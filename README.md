@@ -1,4 +1,4 @@
-A nifty app to help you memorize anything you want
+A nifty android app to help you memorize anything you want
 
 ![main](images/main1.png?raw=true)
 ![question](images/question1.png?raw=true)
