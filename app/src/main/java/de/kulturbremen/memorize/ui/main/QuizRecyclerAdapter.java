@@ -35,14 +35,13 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_item, parent, false);
+                .inflate(R.layout.fragment_item_display, parent, false);
         return new ViewHolder(view, onQuizListener, onEditQuizListener);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.item = quizzes.get(position).getName();
-        holder.contentView.setText(quizzes.get(position).getName());
+        holder.getContentView().setText(quizzes.get(position).getName());
     }
 
     @Override
@@ -51,24 +50,19 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public final View view;
-        public final TextView contentView;
-        public final ImageView editButton;
-        public String item;
-        OnQuizListener onQuizListener;
-        OnEditQuizListener onEditQuizListener;
+        private final TextView contentView;
+        private OnQuizListener onQuizListener;
+        private OnEditQuizListener onEditQuizListener;
 
         public ViewHolder(View view,
                           OnQuizListener onQuizListener, OnEditQuizListener onEditQuizListener) {
             super(view);
-            this.view = view;
-            contentView = view.findViewById(R.id.content);
-            editButton = view.findViewById(R.id.editButton);
-
+            this.contentView = view.findViewById(R.id.content);
             this.onQuizListener = onQuizListener;
             this.onEditQuizListener = onEditQuizListener;
 
             contentView.setOnClickListener(this);
+            ImageView editButton = view.findViewById(R.id.editButton);
             editButton.setOnClickListener(this);
 
         }
@@ -91,6 +85,10 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
                     break;
                 }
             }
+        }
+
+        public TextView getContentView() {
+            return contentView;
         }
     }
 
