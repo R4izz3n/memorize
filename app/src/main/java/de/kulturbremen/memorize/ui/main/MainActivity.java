@@ -2,9 +2,12 @@ package de.kulturbremen.memorize.ui.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import de.kulturbremen.memorize.R;
+import de.kulturbremen.memorize.ui.edit.EditQuiz;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,4 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void addQuiz(View view){
+        Intent intent = new Intent(this, EditQuiz.class);
+        startActivity(intent);
+    }
 }

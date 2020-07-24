@@ -7,6 +7,10 @@ import androidx.room.PrimaryKey;
 
 import java.time.ZonedDateTime;
 
+/**
+ * A class that represent a Question Entity
+ * Contains more meta information than QuestionModel
+ */
 @Entity(indices = {@Index("quizId")})
 public class QuestionEntity {
     @PrimaryKey(autoGenerate = true)
@@ -18,7 +22,7 @@ public class QuestionEntity {
     @NonNull
     private ZonedDateTime creationDate;
     @NonNull
-    private Integer quizId;
+    private Long quizId;
 
     public QuestionEntity(QuestionEntity questionEntity) {
         this.id = questionEntity.getId();
@@ -29,7 +33,7 @@ public class QuestionEntity {
     }
 
     public QuestionEntity(@NonNull String question, @NonNull String answer,
-                          @NonNull Integer quizId) {
+                          @NonNull Long quizId) {
         this.question = question;
         this.answer = answer;
         this.creationDate = ZonedDateTime.now();
@@ -71,11 +75,11 @@ public class QuestionEntity {
         this.creationDate = creationDate;
     }
     @NonNull
-    public Integer getQuizId() {
+    public Long getQuizId() {
         return quizId;
     }
 
-    public void setQuizId(@NonNull Integer quizId) {
+    public void setQuizId(@NonNull Long quizId) {
         this.quizId = quizId;
     }
 }

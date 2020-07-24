@@ -11,7 +11,6 @@ import de.kulturbremen.memorize.model.QuizEntity;
  * Repository module for handling data operations.
  */
 public class QuizRepository {
-    private static final String TAG = "QuizRepository";
     private AppDatabase appDatabase;
 
     public QuizRepository(Context context) {
@@ -20,13 +19,16 @@ public class QuizRepository {
 
 
     public List<QuizEntity> getQuizzes(){
-        int numberOfColumns = appDatabase.QuizDao().debug_all();
-        Log.d(TAG, "getQuizzes: " + numberOfColumns);
         return appDatabase.QuizDao().getQuizzes();
     }
 
-    public void addQuiz(QuizEntity quizEntity){
-        appDatabase.QuizDao().insertQuiz(quizEntity);
+    /**
+     * Add a quiz to the database
+     * @param quizEntity The quiz to add to the database
+     * @return QuizEntity.id
+     */
+    public long addQuiz(QuizEntity quizEntity){
+        return appDatabase.QuizDao().insertQuiz(quizEntity);
     }
 
     public void deleteQuiz(QuizEntity quizEntity){

@@ -23,8 +23,13 @@ public class QuestionRepository {
         return appDatabase.QuestionDao().getQuestionsByQuizId(quizId);
     }
 
-    public void addQuestion(QuestionEntity questionEntity) {
-        appDatabase.QuestionDao().insertQuestion(questionEntity);
+    /**
+     * add a question to the database
+     * @param questionEntity the question to add
+     * @return QuestionEntity.id
+     */
+    public long addQuestion(QuestionEntity questionEntity) {
+        return appDatabase.QuestionDao().insertQuestion(questionEntity);
     }
 
     public void deleteQuestion(QuestionEntity questionEntity) {

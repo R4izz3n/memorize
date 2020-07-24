@@ -2,8 +2,6 @@
     <string name="app_name">memorize</string>
     <string name="example">example</string>
     <string name="checkAnswerButton">Check</string>
-    <string name="questionEntity">This is where the questionEntity will be in the future?</string>
-    <string name="answer">Answer Oh my answer is just as long so long is my answer so long!</string>
     <string name="questionLabel">Question:</string>
     <string name="answerLabel">Answer:</string>
     <string name="nextButton">continue</string>
@@ -17,4 +15,14 @@
     <string name="return_message">Return</string>
     <string name="question_icon">Question Icon</string>
     <string name="edit_quiz_button">edit quiz</string>
+    <string name="quiz_name">Quiz Name</string>
+    <string name="question">Question</string>
+    <string name="answer">Answer</string>
+    <string name="save">Save</string>
+    <string name="save_quiz">save quiz</string>
+    <string name="cancel_edit_quiz">cancel edit quiz</string>
+    <string name="add_question">add question</string>
+    <string name="submit">submit</string>
+    <string name="editQuestionLabel">Q:</string>
+    <string name="editAnswerLabel">A:</string>
 </resources>
