@@ -34,7 +34,6 @@ import de.kulturbremen.memorize.model.QuizEntity;
  * noMoreQuestions RuntimeException when there are no questions left.
  */
 public class QuestionManager {
-    private static final String TAG = "QuestionManager";
     private static QuestionManager instance = new QuestionManager();
     private List<QuestionEntity> questions = new ArrayList<>();
     private ArrayList<Integer> unansweredQuestions = new ArrayList<>();  // with indexes from QUESTIONS
