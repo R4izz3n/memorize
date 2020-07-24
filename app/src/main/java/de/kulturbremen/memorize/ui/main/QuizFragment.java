@@ -19,6 +19,7 @@ import de.kulturbremen.memorize.R;
 import de.kulturbremen.memorize.model.QuizEntity;
 import de.kulturbremen.memorize.manager.QuestionManager;
 import de.kulturbremen.memorize.manager.QuizManager;
+import de.kulturbremen.memorize.ui.Util;
 import de.kulturbremen.memorize.ui.question.QuestionActivity;
 
 /**
@@ -47,16 +48,19 @@ public class QuizFragment extends Fragment
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
 
-        // Set the adapter
         if (view instanceof RecyclerView) {
-            context = view.getContext();
-            QuizManager quizManager = new QuizManager(context);
-            RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(new QuizRecyclerAdapter(quizManager.getQuizzes(),
-                    this, this));
+            setAdapter(view);
         }
         return view;
+    }
+
+    private void setAdapter(View view) {
+        context = view.getContext();
+        QuizManager quizManager = new QuizManager(context);
+        RecyclerView recyclerView = (RecyclerView) view;
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setAdapter(new QuizRecyclerAdapter(quizManager.getQuizzes(),
+                this, this));
     }
 
     @Override
@@ -67,10 +71,7 @@ public class QuizFragment extends Fragment
         if (qm.hasQuestions()) {
             startActivity(intent);
         } else {
-            int duration = Toast.LENGTH_SHORT;
-            String message = "No questions available for this quiz";
-            Toast toast = Toast.makeText(context, message, duration);
-            toast.show();
+            Util.showToast(context, "No questions available for this quiz");
         }
     }
 
