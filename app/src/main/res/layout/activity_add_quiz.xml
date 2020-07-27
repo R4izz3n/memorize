@@ -54,8 +54,21 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="@string/submit"
+        android:textColor="@android:color/white"
+        app:backgroundTint="@android:color/background_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/deleteQuizButton" />
+
+    <Button
+        android:id="@+id/deleteQuizButton"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/submitQuizButton"
         app:layout_constraintStart_toStartOf="parent" />
 
 

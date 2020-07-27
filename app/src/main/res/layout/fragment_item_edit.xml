@@ -16,78 +16,102 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/questionLinearLayout"
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/editQuestionLabel"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/questionAndAnswerLinearLayout"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/editQuestionLabel"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@id/editQuestion"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/editQuestion"
-                app:layout_constraintBottom_toBottomOf="@id/editQuestion"
-                tools:layout_editor_absoluteY="30dp" />
-
-            <EditText
-                android:id="@+id/editQuestion"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="@string/question"
-                android:text="@={question.question}"
-                android:inputType="textPersonName"
-                app:layout_constraintBottom_toTopOf="@id/editAnswer"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toEndOf="@id/deleteQuestionButton"
+                app:layout_constraintTop_toTopOf="parent">
 
-        </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/questionLinearLayout"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:id="@+id/answerLinearLayout"
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
+                    <TextView
+                        android:id="@+id/editQuestionLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/editQuestionLabel"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@id/editQuestion"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/editQuestion"
+                        app:layout_constraintBottom_toBottomOf="@id/editQuestion"
+                        tools:layout_editor_absoluteY="30dp" />
+
+                    <EditText
+                        android:id="@+id/editQuestion"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:autofillHints=""
+                        android:ems="10"
+                        android:hint="@string/question"
+                        android:text="@={question.question}"
+                        android:inputType="textPersonName"
+                        app:layout_constraintBottom_toTopOf="@id/editAnswer"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/answerLinearLayout"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/questionLinearLayout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <TextView
+                        android:id="@+id/editAnswerLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/editAnswerLabel"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/editAnswer"
+                        app:layout_constraintEnd_toStartOf="@id/editAnswer"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/editAnswer" />
+
+
+                    <EditText
+                        android:id="@+id/editAnswer"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:autofillHints=""
+                        android:ems="10"
+                        android:hint="@string/answer"
+                        android:text="@={question.answer}"
+                        android:inputType="textPersonName"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/editQuestion" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/deleteQuestionButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/questionLinearLayout"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/delete_question"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/questionAndAnswerLinearLayout"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <TextView
-                android:id="@+id/editAnswerLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/editAnswerLabel"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/editAnswer"
-                app:layout_constraintEnd_toStartOf="@id/editAnswer"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/editAnswer" />
-
-
-            <EditText
-                android:id="@+id/editAnswer"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="@string/answer"
-                android:text="@={question.answer}"
-                android:inputType="textPersonName"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editQuestion" />
-
-        </LinearLayout>
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

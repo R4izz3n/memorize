@@ -23,7 +23,8 @@ import de.kulturbremen.memorize.ui.Util;
 /**
  * Activity used for creating a new quiz with questions or editing an existing one
  */
-public class EditQuiz extends AppCompatActivity implements View.OnClickListener{
+public class EditQuiz extends AppCompatActivity
+        implements View.OnClickListener, QuestionRecyclerAdapter.OnDeleteQuestionListener {
     private List<QuestionModel> questionList;
     private QuestionRecyclerAdapter questionAdapter;
     private RecyclerView recyclerView;
@@ -46,7 +47,7 @@ public class EditQuiz extends AppCompatActivity implements View.OnClickListener{
     private void setAdapter() {
         Context context = getApplicationContext();
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        questionAdapter = new QuestionRecyclerAdapter(questionList);
+        questionAdapter = new QuestionRecyclerAdapter(questionList, this);
         recyclerView.setAdapter(questionAdapter);
     }
 
@@ -75,24 +76,24 @@ public class EditQuiz extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.addQuestionButton:{
-                onAddQuestion();
+                onAddQuestionClick();
                 break;
             }
 
             case R.id.submitQuizButton:{
-                onSubmitQuiz(view);
+                onSubmitQuizClick(view);
                 break;
 
             }
         }
     }
 
-    private void onAddQuestion() {
+    private void onAddQuestionClick() {
         questionList.add(new QuestionModel());
         questionAdapter.notifyItemInserted(questionList.size() - 1);
     }
 
-    private void onSubmitQuiz(View view) {
+    private void onSubmitQuizClick(View view) {
         Context context = view.getContext();
         EditText quizNameEditText = findViewById(R.id.quizName);
         String quizName = quizNameEditText.getText().toString().trim();
@@ -104,5 +105,11 @@ public class EditQuiz extends AppCompatActivity implements View.OnClickListener{
         quizManager.addQuiz(quizName, questionList);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onDeleteQuestionClick(int position) {
+        questionList.remove(position);
+        questionAdapter.notifyItemRemoved(position);
     }
 }

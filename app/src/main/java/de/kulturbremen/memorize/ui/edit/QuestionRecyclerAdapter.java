@@ -1,7 +1,9 @@
 package de.kulturbremen.memorize.ui.edit;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,9 +21,12 @@ import de.kulturbremen.memorize.model.QuestionModel;
  */
 public class QuestionRecyclerAdapter extends RecyclerView.Adapter<QuestionRecyclerAdapter.ViewHolder> {
     private final List<QuestionModel> questions;
+    private OnDeleteQuestionListener onDeleteQuestionListener;
 
-    public QuestionRecyclerAdapter(List<QuestionModel> questions) {
+    public QuestionRecyclerAdapter(List<QuestionModel> questions,
+                                   OnDeleteQuestionListener onDeleteQuestionListener) {
         this.questions = questions;
+        this.onDeleteQuestionListener = onDeleteQuestionListener;
     }
 
     @NonNull
@@ -43,12 +48,15 @@ public class QuestionRecyclerAdapter extends RecyclerView.Adapter<QuestionRecycl
         return questions.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private FragmentItemEditBinding binding;
 
         public ViewHolder(FragmentItemEditBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+
+            ImageButton deleteQuestionButton = itemView.findViewById(R.id.deleteQuestionButton);
+            deleteQuestionButton.setOnClickListener(this);
         }
 
         public void bind(QuestionModel question){
@@ -64,6 +72,16 @@ public class QuestionRecyclerAdapter extends RecyclerView.Adapter<QuestionRecycl
         }
 
 
+        @Override
+        public void onClick(View view) {
+            if (view.getId() == R.id.deleteQuestionButton){
+                onDeleteQuestionListener.onDeleteQuestionClick(getAdapterPosition());
+            }
+        }
+    }
+
+    public interface OnDeleteQuestionListener {
+        void onDeleteQuestionClick(int position);
     }
 
 }

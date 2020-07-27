@@ -25,4 +25,6 @@
     <string name="submit">submit</string>
     <string name="editQuestionLabel">Q:</string>
     <string name="editAnswerLabel">A:</string>
+    <string name="delete">delete</string>
+    <string name="delete_question">delete question</string>
 </resources>
