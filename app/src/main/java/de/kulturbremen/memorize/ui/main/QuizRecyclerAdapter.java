@@ -36,7 +36,7 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_item_display, parent, false);
-        return new ViewHolder(view, onQuizListener, onEditQuizListener);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -51,15 +51,10 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView contentView;
-        private OnQuizListener onQuizListener;
-        private OnEditQuizListener onEditQuizListener;
 
-        public ViewHolder(View view,
-                          OnQuizListener onQuizListener, OnEditQuizListener onEditQuizListener) {
+        public ViewHolder(View view) {
             super(view);
             this.contentView = view.findViewById(R.id.content);
-            this.onQuizListener = onQuizListener;
-            this.onEditQuizListener = onEditQuizListener;
 
             contentView.setOnClickListener(this);
             ImageView editButton = view.findViewById(R.id.editButton);
