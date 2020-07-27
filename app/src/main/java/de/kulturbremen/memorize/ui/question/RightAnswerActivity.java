@@ -25,7 +25,7 @@ public class RightAnswerActivity extends AppCompatActivity {
             Intent intent = new Intent(this, QuestionActivity.class);
             waitAndGoToNextIntent(intent);
         } else {
-            Intent intent = new Intent(this, FinishedLastQuestion.class);
+            Intent intent = new Intent(this, FinishedLastQuestionActivity.class);
             waitAndGoToNextIntent(intent);
         }
     }

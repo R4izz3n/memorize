@@ -8,7 +8,7 @@ import android.view.View;
 import de.kulturbremen.memorize.R;
 import de.kulturbremen.memorize.ui.main.MainActivity;
 
-public class FinishedLastQuestion extends AppCompatActivity {
+public class FinishedLastQuestionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
