@@ -5,10 +5,11 @@ import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.time.ZonedDateTime;
 
 @Entity(indices = {@Index("name")})
-public class QuizEntity {
+public class QuizEntity implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
     @NonNull
@@ -64,5 +65,12 @@ public class QuizEntity {
 
     public void setDateLastAltered(@NonNull ZonedDateTime dateLastAltered) {
         this.dateLastAltered = dateLastAltered;
+    }
+
+    @Override
+    public String toString() {
+        return "QuizEntity{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }

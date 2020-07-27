@@ -9,17 +9,16 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import de.kulturbremen.memorize.R;
 import de.kulturbremen.memorize.model.QuizEntity;
 import de.kulturbremen.memorize.manager.QuestionManager;
 import de.kulturbremen.memorize.manager.QuizManager;
 import de.kulturbremen.memorize.ui.Util;
+import de.kulturbremen.memorize.ui.edit.EditQuizActivity;
 import de.kulturbremen.memorize.ui.question.QuestionActivity;
 
 /**
@@ -28,8 +27,8 @@ import de.kulturbremen.memorize.ui.question.QuestionActivity;
 public class QuizFragment extends Fragment
         implements QuizRecyclerAdapter.OnQuizListener, QuizRecyclerAdapter.OnEditQuizListener {
 
-    private static final String TAG = "QuizFragment";
     private Context context;
+    public static final String EXTRA_QUESTIONS = "de.kulturbremen.EXTRA_QUESTIONS";
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -77,6 +76,8 @@ public class QuizFragment extends Fragment
 
     @Override
     public void onEditQuizClick(QuizEntity quiz) {
-        Log.d(TAG, "onEditQuizClick: clicked! (" + quiz + ")");
+        Intent intent = new Intent(getActivity(), EditQuizActivity.class);
+        intent.putExtra(EXTRA_QUESTIONS, quiz);
+        startActivity(intent);
     }
 }

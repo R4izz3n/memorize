@@ -13,7 +13,7 @@ import de.kulturbremen.memorize.model.QuestionEntity;
 @Dao
 public interface QuestionDao {
     @Query("SELECT * FROM QuestionEntity WHERE quizId = :quizId")
-    List<QuestionEntity> getQuestionsByQuizId(int quizId);
+    List<QuestionEntity> getQuestionsByQuizId(long quizId);
 
     @Query("SELECT * FROM QuestionEntity WHERE id = :id")
     QuestionEntity getQuestionById(long id);
@@ -26,4 +26,7 @@ public interface QuestionDao {
 
     @Delete
     void deleteQuestion(QuestionEntity questionEntity);
+
+    @Query("DELETE FROM QuestionEntity WHERE quizId = :quizId")
+    void deleteQuestions(long quizId);
 }

@@ -16,8 +16,10 @@ import java.util.List;
 import de.kulturbremen.memorize.R;
 import de.kulturbremen.memorize.manager.QuizManager;
 import de.kulturbremen.memorize.model.QuestionEntity;
+import de.kulturbremen.memorize.model.QuizEntity;
 import de.kulturbremen.memorize.ui.main.MainActivity;
 import de.kulturbremen.memorize.ui.Util;
+import de.kulturbremen.memorize.ui.main.QuizFragment;
 
 
 /**
@@ -26,7 +28,10 @@ import de.kulturbremen.memorize.ui.Util;
 public class EditQuizActivity extends AppCompatActivity
         implements View.OnClickListener, QuestionRecyclerAdapter.OnDeleteQuestionListener {
     private List<QuestionEntity> questionList;
+    private QuizEntity quizEntity;
+    private QuizManager quizManager;
     private QuestionRecyclerAdapter questionAdapter;
+    private EditText quizNameEditText;
     private RecyclerView recyclerView;
 
     @Override
@@ -34,20 +39,36 @@ public class EditQuizActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_quiz);
 
-        questionList = new ArrayList<>();
-        questionList.add(new QuestionEntity());
+        quizManager = new QuizManager(getApplicationContext());
+        quizNameEditText = findViewById(R.id.quizName);
         recyclerView = findViewById(R.id.questionList);
 
+        setQuestionListAndQuizEntity();
         setAdapter();
         setAdapterDataObserver();
         setListener();
 
     }
 
+    private void setQuestionListAndQuizEntity() {
+        Intent intent = getIntent();
+        QuizEntity quiz = (QuizEntity) intent.getSerializableExtra(QuizFragment.EXTRA_QUESTIONS);
+        if (quiz != null){
+            quizEntity = quiz;
+            quizNameEditText.setText(quiz.getName());
+            questionList = quizManager.getQuestions(quiz);
+        } else {
+            quizEntity = new QuizEntity("");
+            questionList = new ArrayList<>();
+            questionList.add(new QuestionEntity());
+        }
+    }
+
     private void setAdapter() {
         Context context = getApplicationContext();
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        questionAdapter = new QuestionRecyclerAdapter(questionList, this);
+        questionAdapter = new QuestionRecyclerAdapter(questionList, quizEntity,
+                this);
         recyclerView.setAdapter(questionAdapter);
     }
 
@@ -70,6 +91,7 @@ public class EditQuizActivity extends AppCompatActivity
     private void setListener(){
         findViewById(R.id.addQuestionButton).setOnClickListener(this);
         findViewById(R.id.submitQuizButton).setOnClickListener(this);
+        findViewById(R.id.deleteQuizButton).setOnClickListener(this);
     }
 
     @Override
@@ -79,11 +101,13 @@ public class EditQuizActivity extends AppCompatActivity
                 onAddQuestionClick();
                 break;
             }
-
             case R.id.submitQuizButton:{
                 onSubmitQuizClick(view);
                 break;
-
+            }
+            case R.id.deleteQuizButton:{
+                onDeleteQuizClick();
+                break;
             }
         }
     }
@@ -95,14 +119,20 @@ public class EditQuizActivity extends AppCompatActivity
 
     private void onSubmitQuizClick(View view) {
         Context context = view.getContext();
-        EditText quizNameEditText = findViewById(R.id.quizName);
         String quizName = quizNameEditText.getText().toString().trim();
         if (quizName.equals("")) {
             Util.showToast(context, "Please add a quiz name");
             return;
         }
-        QuizManager quizManager = new QuizManager(context);
-        quizManager.addQuiz(quizName, questionList);
+        quizEntity.setName(quizName);
+
+        quizManager.editQuiz(quizEntity, questionList);
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    private void onDeleteQuizClick() {
+        quizManager.deleteQuiz(quizEntity);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }

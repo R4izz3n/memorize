@@ -13,10 +13,8 @@ import de.kulturbremen.memorize.model.QuizEntity;
 public class QuizManager {
     private QuizRepository quizRepository;
     private QuestionRepository questionRepository;
-    private Context context;
 
     public QuizManager(Context context) {
-        this.context = context;
         this.quizRepository = new QuizRepository(context);
         this.questionRepository = new QuestionRepository(context);
     }
@@ -30,10 +28,19 @@ public class QuizManager {
         }
     }
 
-    public void addQuiz(String quizName, List<QuestionEntity> questions){
-        QuizEntity quiz = new QuizEntity(quizName.trim());
+    /**
+     * Either add or update a quiz with questions to the database
+     * @param quiz the QuizEntity to be edited
+     * @param questions the QuestionEntities to be edited
+     */
+    public void editQuiz(QuizEntity quiz, List<QuestionEntity> questions){
+        quiz.setName(quiz.getName().trim());
+        if (quiz.getId() != 0) {
+            quizRepository.deleteQuiz(quiz);
+        }
         long quizID = quizRepository.addQuiz(quiz);
 
+        questionRepository.deleteQuestions(quizID);
         for (QuestionEntity questionEntity: questions){
             String question = questionEntity.getQuestion().trim();
             String answer = questionEntity.getAnswer().trim();
@@ -47,10 +54,16 @@ public class QuizManager {
         }
     }
 
-    public List<QuestionEntity> getQuizData(QuizEntity quiz){
+    /**
+     * Delete a QuizEntity and the corresponding QuizEntities
+     * @param quiz the quiz to be deleted
+     */
+    public void deleteQuiz(QuizEntity quiz) {
+        questionRepository.deleteQuestions(quiz.getId());
+        quizRepository.deleteQuiz(quiz);
+    }
 
-        QuestionRepository questionRepository = new QuestionRepository(context);
+    public List<QuestionEntity> getQuestions(QuizEntity quiz){
         return questionRepository.getQuestions(quiz);
-
     }
 }

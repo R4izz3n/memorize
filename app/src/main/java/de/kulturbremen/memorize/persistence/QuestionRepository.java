@@ -11,7 +11,6 @@ import de.kulturbremen.memorize.model.QuizEntity;
  * Repository module for handling data operations.
  */
 public class QuestionRepository {
-    public static final String TAG = "QuestionRepository";
     private AppDatabase appDatabase;
 
     public QuestionRepository(Context context) {
@@ -34,5 +33,9 @@ public class QuestionRepository {
 
     public void deleteQuestion(QuestionEntity questionEntity) {
         appDatabase.QuestionDao().deleteQuestion(questionEntity);
+    }
+
+    public void deleteQuestions(long quizID) {
+        appDatabase.QuestionDao().deleteQuestions(quizID);
     }
 }

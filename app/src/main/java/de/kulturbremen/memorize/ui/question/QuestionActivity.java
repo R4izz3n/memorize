@@ -13,7 +13,6 @@ import de.kulturbremen.memorize.R;
 import de.kulturbremen.memorize.manager.QuestionManager;
 
 public class QuestionActivity extends AppCompatActivity {
-    public static final String EXTRA_USER_ANSWER = "de.kulturbremen.memorize.USER_ANSWER";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
