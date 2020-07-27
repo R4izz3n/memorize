@@ -21,7 +21,6 @@ public class QuestionEntity {
     private String answer;
     @NonNull
     private ZonedDateTime creationDate;
-    @NonNull
     private Long quizId;
 
     public QuestionEntity(QuestionEntity questionEntity) {
@@ -38,6 +37,12 @@ public class QuestionEntity {
         this.answer = answer;
         this.creationDate = ZonedDateTime.now();
         this.quizId = quizId;
+    }
+
+    public QuestionEntity(){
+        this.question = "";
+        this.answer = "";
+        this.creationDate = ZonedDateTime.now();
     }
 
     public int getId() {
@@ -81,5 +86,14 @@ public class QuestionEntity {
 
     public void setQuizId(@NonNull Long quizId) {
         this.quizId = quizId;
+    }
+
+    @Override
+    public String toString() {
+        return "QuestionEntity{" +
+                "question='" + question + '\'' +
+                ", answer='" + answer + '\'' +
+                ", quizId=" + quizId +
+                '}';
     }
 }

@@ -14,16 +14,16 @@ import java.util.List;
 
 import de.kulturbremen.memorize.R;
 import de.kulturbremen.memorize.databinding.FragmentItemEditBinding;
-import de.kulturbremen.memorize.model.QuestionModel;
+import de.kulturbremen.memorize.model.QuestionEntity;
 
 /**
  * {@link RecyclerView.Adapter} that can display a list of strings with QuizEntity names.
  */
 public class QuestionRecyclerAdapter extends RecyclerView.Adapter<QuestionRecyclerAdapter.ViewHolder> {
-    private final List<QuestionModel> questions;
+    private final List<QuestionEntity> questions;
     private OnDeleteQuestionListener onDeleteQuestionListener;
 
-    public QuestionRecyclerAdapter(List<QuestionModel> questions,
+    public QuestionRecyclerAdapter(List<QuestionEntity> questions,
                                    OnDeleteQuestionListener onDeleteQuestionListener) {
         this.questions = questions;
         this.onDeleteQuestionListener = onDeleteQuestionListener;
@@ -59,7 +59,7 @@ public class QuestionRecyclerAdapter extends RecyclerView.Adapter<QuestionRecycl
             deleteQuestionButton.setOnClickListener(this);
         }
 
-        public void bind(QuestionModel question){
+        public void bind(QuestionEntity question){
             binding.setQuestion(question);
             // important to execute binding immediately, to not populate incorrect view
             binding.executePendingBindings();

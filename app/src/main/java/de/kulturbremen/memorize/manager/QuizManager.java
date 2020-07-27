@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.kulturbremen.memorize.model.QuestionEntity;
-import de.kulturbremen.memorize.model.QuestionModel;
 import de.kulturbremen.memorize.persistence.QuestionRepository;
 import de.kulturbremen.memorize.persistence.QuizRepository;
 import de.kulturbremen.memorize.model.QuizEntity;
@@ -14,8 +13,10 @@ import de.kulturbremen.memorize.model.QuizEntity;
 public class QuizManager {
     private QuizRepository quizRepository;
     private QuestionRepository questionRepository;
+    private Context context;
 
     public QuizManager(Context context) {
+        this.context = context;
         this.quizRepository = new QuizRepository(context);
         this.questionRepository = new QuestionRepository(context);
     }
@@ -29,18 +30,27 @@ public class QuizManager {
         }
     }
 
-    public void addQuiz(String quizName, List<QuestionModel> questions){
+    public void addQuiz(String quizName, List<QuestionEntity> questions){
         QuizEntity quiz = new QuizEntity(quizName.trim());
         long quizID = quizRepository.addQuiz(quiz);
 
-        for (QuestionModel questionModel: questions){
-            String question = questionModel.getQuestion().trim();
-            String answer = questionModel.getAnswer().trim();
+        for (QuestionEntity questionEntity: questions){
+            String question = questionEntity.getQuestion().trim();
+            String answer = questionEntity.getAnswer().trim();
             if (question.equals("") && answer.equals("")){
                 continue;
             }
-            QuestionEntity questionEntity = new QuestionEntity(question, answer, quizID);
+            questionEntity.setQuestion(question);
+            questionEntity.setAnswer(answer);
+            questionEntity.setQuizId(quizID);
             questionRepository.addQuestion(questionEntity);
         }
+    }
+
+    public List<QuestionEntity> getQuizData(QuizEntity quiz){
+
+        QuestionRepository questionRepository = new QuestionRepository(context);
+        return questionRepository.getQuestions(quiz);
+
     }
 }

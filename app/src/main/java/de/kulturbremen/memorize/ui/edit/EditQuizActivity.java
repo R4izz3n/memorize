@@ -15,7 +15,7 @@ import java.util.List;
 
 import de.kulturbremen.memorize.R;
 import de.kulturbremen.memorize.manager.QuizManager;
-import de.kulturbremen.memorize.model.QuestionModel;
+import de.kulturbremen.memorize.model.QuestionEntity;
 import de.kulturbremen.memorize.ui.main.MainActivity;
 import de.kulturbremen.memorize.ui.Util;
 
@@ -23,9 +23,9 @@ import de.kulturbremen.memorize.ui.Util;
 /**
  * Activity used for creating a new quiz with questions or editing an existing one
  */
-public class EditQuiz extends AppCompatActivity
+public class EditQuizActivity extends AppCompatActivity
         implements View.OnClickListener, QuestionRecyclerAdapter.OnDeleteQuestionListener {
-    private List<QuestionModel> questionList;
+    private List<QuestionEntity> questionList;
     private QuestionRecyclerAdapter questionAdapter;
     private RecyclerView recyclerView;
 
@@ -35,7 +35,7 @@ public class EditQuiz extends AppCompatActivity
         setContentView(R.layout.activity_add_quiz);
 
         questionList = new ArrayList<>();
-        questionList.add(new QuestionModel());
+        questionList.add(new QuestionEntity());
         recyclerView = findViewById(R.id.questionList);
 
         setAdapter();
@@ -89,7 +89,7 @@ public class EditQuiz extends AppCompatActivity
     }
 
     private void onAddQuestionClick() {
-        questionList.add(new QuestionModel());
+        questionList.add(new QuestionEntity());
         questionAdapter.notifyItemInserted(questionList.size() - 1);
     }
 
