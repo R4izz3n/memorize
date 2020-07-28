@@ -23,7 +23,7 @@ public class TestQuestionEntity {
     private QuestionDao questionDao;
     private AppDatabase db;
     private QuestionEntity testQuestion = new QuestionEntity(
-            "why?", "that's why", 1);
+            "why?", "that's why", (long) 1);
 
     @Before
     public void createDb() {
@@ -81,4 +81,15 @@ public class TestQuestionEntity {
         assertEquals(0, questions.size());
     }
 
+    @Test
+    public void deleteQuestions() {
+        //GIVEN multiple questions that are present
+        questionDao.insertQuestion(testQuestion);
+        questionDao.insertQuestion(testQuestion);
+        // WHEN all questions are deleted
+        questionDao.deleteQuestions(testQuestion.getQuizId());
+        // THEN there should be no more questions
+        List<QuestionEntity> questions = questionDao.getQuestionsByQuizId(testQuestion.getQuizId());
+        assertEquals(0, questions.size());
+    }
 }
