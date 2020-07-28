@@ -13,7 +13,7 @@ import de.kulturbremen.memorize.model.QuizEntity;
 
 
 /**
- * A singleton class that holds QuestionContainers
+ * A singleton class that holds QuestionEntities
  *
  * Questions will always be shuffled, and can sequentially be retrieved, removed or reshuffled.
  * The most recent question can be compared to a user answer.
@@ -120,11 +120,11 @@ public class QuestionManager {
         }
 
         int lastQuestion = unansweredQuestions.remove(0);
-        if (unansweredQuestions.size() > 1) {
+        if (unansweredQuestions.size() > 0) {
             int newIndex = new Random().nextInt(unansweredQuestions.size()) + 1;  // never at 0
             unansweredQuestions.add(newIndex, lastQuestion);
         } else {
-            unansweredQuestions.add(0, lastQuestion);
+            unansweredQuestions.add(lastQuestion);
         }
     }
 
