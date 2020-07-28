@@ -22,9 +22,11 @@
     <string name="save_quiz">save quiz</string>
     <string name="cancel_edit_quiz">cancel edit quiz</string>
     <string name="add_question">add question</string>
-    <string name="submit">submit</string>
+    <string name="submit">Submit</string>
     <string name="editQuestionLabel">Q:</string>
     <string name="editAnswerLabel">A:</string>
-    <string name="delete">delete</string>
+    <string name="delete">Delete</string>
     <string name="delete_question">delete question</string>
+    <string name="dialog_delete_quiz">Do you really want to delete this quiz?</string>
+    <string name="cancel">Cancel</string>
 </resources>

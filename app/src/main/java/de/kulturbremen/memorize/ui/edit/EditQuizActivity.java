@@ -1,6 +1,7 @@
 package de.kulturbremen.memorize.ui.edit;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,7 +27,8 @@ import de.kulturbremen.memorize.ui.main.QuizFragment;
  * Activity used for creating a new quiz with questions or editing an existing one
  */
 public class EditQuizActivity extends AppCompatActivity
-        implements View.OnClickListener, QuestionRecyclerAdapter.OnDeleteQuestionListener {
+        implements View.OnClickListener, QuestionRecyclerAdapter.OnDeleteQuestionListener,
+        DeleteQuizDialogFragment.NoticeDialogListener{
     private List<QuestionEntity> questionList;
     private QuizEntity quizEntity;
     private QuizManager quizManager;
@@ -132,14 +134,25 @@ public class EditQuizActivity extends AppCompatActivity
     }
 
     private void onDeleteQuizClick() {
-        quizManager.deleteQuiz(quizEntity);
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        DialogFragment dialog = new DeleteQuizDialogFragment();
+        dialog.show(getSupportFragmentManager(), "DeleteQuizDialogFragment");
     }
 
     @Override
     public void onDeleteQuestionClick(int position) {
         questionList.remove(position);
         questionAdapter.notifyItemRemoved(position);
+    }
+
+    @Override
+    public void onDialogPositiveClick() {
+        quizManager.deleteQuiz(quizEntity);
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+
+    }
+
+    @Override
+    public void onDialogNegativeClick() {
     }
 }
