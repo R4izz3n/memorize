@@ -22,7 +22,7 @@ import de.kulturbremen.memorize.model.QuizEntity;
  * QuestionManager qm = QuestionManager.getInstance();
  * qm.setQuestions(myQuestions);
  * if (qm.hasQuestions()) {...}
- * String question = qm.getQuestionContainer().getQuestion();
+ * String question = qm.getQuestionEntity().getQuestion();
  * // (...)
  * boolean answerIsCorrect = qm.checkAnswer(userAnswer);
  * // and then
