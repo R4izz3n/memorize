@@ -1,4 +1,4 @@
-package de.kulturbremen.memorize.data;
+package de.kulturbremen.memorize.persistence;
 
 import android.content.Context;
 
@@ -14,7 +14,6 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import de.kulturbremen.memorize.persistence.AppDatabase;
 import de.kulturbremen.memorize.persistence.dao.QuestionDao;
 import de.kulturbremen.memorize.model.QuestionEntity;
 

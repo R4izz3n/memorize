@@ -1,4 +1,4 @@
-package de.kulturbremen.memorize.data;
+package de.kulturbremen.memorize.persistence;
 
 import android.content.Context;
 
@@ -15,8 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.kulturbremen.memorize.model.QuizEntity;
-import de.kulturbremen.memorize.persistence.AppDatabase;
-import de.kulturbremen.memorize.persistence.QuizRepository;
 
 import static org.junit.Assert.*;
 

@@ -1,4 +1,4 @@
-package de.kulturbremen.memorize.data;
+package de.kulturbremen.memorize.persistence;
 
 import android.content.Context;
 
@@ -13,7 +13,6 @@ import org.junit.runner.RunWith;
 
 import java.util.List;
 
-import de.kulturbremen.memorize.persistence.AppDatabase;
 import de.kulturbremen.memorize.persistence.dao.QuizDao;
 import de.kulturbremen.memorize.model.QuizEntity;
 
