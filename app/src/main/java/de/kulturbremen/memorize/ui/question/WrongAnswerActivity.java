@@ -10,7 +10,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import de.kulturbremen.memorize.R;
-import de.kulturbremen.memorize.manager.QuestionManager;
+import de.kulturbremen.memorize.manager.QuestionsHolder;
 
 public class WrongAnswerActivity extends AppCompatActivity {
 
@@ -20,7 +20,7 @@ public class WrongAnswerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_wrong_answer);
 
         // set the text of the question
-        QuestionManager qm = QuestionManager.getInstance();
+        QuestionsHolder qm = QuestionsHolder.getInstance();
         String answer = qm.getQuestionEntity().getAnswer();
         TextView textView = findViewById(R.id.correctAnswer);
         textView.setText(answer);

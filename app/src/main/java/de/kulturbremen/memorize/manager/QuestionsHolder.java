@@ -1,15 +1,11 @@
 package de.kulturbremen.memorize.manager;
 
-import android.content.Context;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import de.kulturbremen.memorize.persistence.QuestionRepository;
 import de.kulturbremen.memorize.model.QuestionEntity;
-import de.kulturbremen.memorize.model.QuizEntity;
 
 
 /**
@@ -19,31 +15,31 @@ import de.kulturbremen.memorize.model.QuizEntity;
  * The most recent question can be compared to a user answer.
  *
  * A typical use scenario would work like so:
- * QuestionManager qm = QuestionManager.getInstance();
+ * QuestionsHolder qH = QuestionsHolder.getInstance();
  * qm.setQuestions(myQuestions);
  * if (qm.hasQuestions()) {...}
- * String question = qm.getQuestionEntity().getQuestion();
+ * String question = qH.getQuestionEntity().getQuestion();
  * // (...)
- * boolean answerIsCorrect = qm.checkAnswer(userAnswer);
+ * boolean answerIsCorrect = qH.checkAnswer(userAnswer);
  * // and then
- * qm.removeLastQuestion();
+ * qH.removeLastQuestion();
  * // or
- * qm.reshuffleLastQuestion()
+ * qH.reshuffleLastQuestion()
  *
  * hasQuestions() and setQuestions() can always be called, the other methods will throw a
  * noMoreQuestions RuntimeException when there are no questions left.
  */
-public class QuestionManager {
-    private static QuestionManager instance = new QuestionManager();
+public class QuestionsHolder {
+    private static QuestionsHolder instance = new QuestionsHolder();
     private List<QuestionEntity> questions = new ArrayList<>();
     private ArrayList<Integer> unansweredQuestions = new ArrayList<>();  // with indexes from QUESTIONS
 
     /**
      * private constructor so it cannot be instantiated
      */
-    private QuestionManager() {}
+    private QuestionsHolder() {}
 
-    public static QuestionManager getInstance(){
+    public static QuestionsHolder getInstance(){
         return instance;
     }
 
@@ -51,9 +47,8 @@ public class QuestionManager {
         return !unansweredQuestions.isEmpty();
     }
 
-    public void updateQuestions(QuizEntity quiz, Context context) {
-        QuestionRepository questionRepository = new QuestionRepository(context);
-        questions = questionRepository.getQuestions(quiz);
+    public void setQuestions(List<QuestionEntity> questions) {
+        this.questions = questions;
         setUnansweredQuestions();
     }
 
@@ -65,11 +60,6 @@ public class QuestionManager {
             unansweredQuestions.add(i);
         }
         Collections.shuffle(unansweredQuestions);
-    }
-
-    public void setQuestions(List<QuestionEntity> questions) {
-        this.questions = questions;
-        setUnansweredQuestions();
     }
 
     public QuestionEntity getQuestionEntity() throws NoMoreQuestions {

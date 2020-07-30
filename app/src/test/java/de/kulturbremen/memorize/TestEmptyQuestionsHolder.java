@@ -9,55 +9,55 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 
+import de.kulturbremen.memorize.manager.QuestionsHolder;
 import de.kulturbremen.memorize.model.QuestionEntity;
-import de.kulturbremen.memorize.manager.QuestionManager;
 
-public class TestEmptyQuestionManager {
+public class TestEmptyQuestionsHolder {
 
-    QuestionManager questionManager = QuestionManager.getInstance();
+    QuestionsHolder questionsHolder = QuestionsHolder.getInstance();
 
     @BeforeEach
     void emptyQuizManagerBefore() {
-        questionManager.removeAllQuestions();
+        questionsHolder.removeAllQuestions();
     }
 
     @Test
     void setQuestionsAddsQuestions() {
-        // GIVEN an empty QuestionManager and a QuestionContainer
+        // GIVEN an empty QuestionsHolder and a QuestionContainer
         QuestionEntity questionAdded = new QuestionEntity("what?", "so",
-                1);
+                (long) 1);
         // WHEN new questions are added
         ArrayList<QuestionEntity> questions = new ArrayList<>();
         questions.add(questionAdded);
-        questionManager.setQuestions(questions);
+        questionsHolder.setQuestions(questions);
         // THEN getQuestion should return a question
-        QuestionEntity questionRetrieved = questionManager.getQuestionEntity();
+        QuestionEntity questionRetrieved = questionsHolder.getQuestionEntity();
         assertEquals(questionAdded, questionRetrieved);
     }
 
     @Test
     void getQuestionThrows() {
-        assertThrows(QuestionManager.NoMoreQuestions.class, questionManager::getQuestionEntity);
+        assertThrows(QuestionsHolder.NoMoreQuestions.class, questionsHolder::getQuestionEntity);
     }
 
     @Test
     void checkAnswerThrows() {
-        assertThrows(QuestionManager.NoMoreQuestions.class, () ->
-                questionManager.checkAnswer("nothing"));
+        assertThrows(QuestionsHolder.NoMoreQuestions.class, () ->
+                questionsHolder.checkAnswer("nothing"));
     }
 
     @Test
     void removeLastQuestionThrows() {
-        assertThrows(QuestionManager.NoMoreQuestions.class, questionManager::removeLastQuestion);
+        assertThrows(QuestionsHolder.NoMoreQuestions.class, questionsHolder::removeLastQuestion);
     }
 
     @Test
     void reshuffleLastQuestionThrows() {
-        assertThrows(QuestionManager.NoMoreQuestions.class, questionManager::reshuffleLastQuestion);
+        assertThrows(QuestionsHolder.NoMoreQuestions.class, questionsHolder::reshuffleLastQuestion);
     }
 
     @Test
     void hasQuestionsReturnsFalse() {
-        assertFalse(questionManager.hasQuestions());
+        assertFalse(questionsHolder.hasQuestions());
     }
 }

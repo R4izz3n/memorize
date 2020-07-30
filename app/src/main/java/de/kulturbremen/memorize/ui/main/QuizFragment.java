@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 
 import de.kulturbremen.memorize.R;
 import de.kulturbremen.memorize.model.QuizEntity;
-import de.kulturbremen.memorize.manager.QuestionManager;
+import de.kulturbremen.memorize.manager.QuestionsHolder;
 import de.kulturbremen.memorize.manager.QuizManager;
 import de.kulturbremen.memorize.ui.Util;
 import de.kulturbremen.memorize.ui.edit.EditQuizActivity;
@@ -28,6 +28,7 @@ public class QuizFragment extends Fragment
         implements QuizRecyclerAdapter.OnQuizListener, QuizRecyclerAdapter.OnEditQuizListener {
 
     private Context context;
+    private QuizManager quizManager;
     public static final String EXTRA_QUESTIONS = "de.kulturbremen.EXTRA_QUESTIONS";
 
     /**
@@ -55,7 +56,7 @@ public class QuizFragment extends Fragment
 
     private void setAdapter(View view) {
         context = view.getContext();
-        QuizManager quizManager = new QuizManager(context);
+        quizManager = new QuizManager(context);
         RecyclerView recyclerView = (RecyclerView) view;
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(new QuizRecyclerAdapter(quizManager.getQuizzes(),
@@ -65,9 +66,9 @@ public class QuizFragment extends Fragment
     @Override
     public void onQuizClick(QuizEntity quiz) {
         Intent intent = new Intent(getActivity(), QuestionActivity.class);
-        QuestionManager qm = QuestionManager.getInstance();
-        qm.updateQuestions(quiz, getContext());
-        if (qm.hasQuestions()) {
+        QuestionsHolder questionsHolder = QuestionsHolder.getInstance();
+        questionsHolder.setQuestions(quizManager.getQuestions(quiz));
+        if (questionsHolder.hasQuestions()) {
             startActivity(intent);
         } else {
             Util.showToast(context, "No questions available for this quiz");

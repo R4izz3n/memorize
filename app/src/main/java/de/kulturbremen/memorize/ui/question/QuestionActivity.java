@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import de.kulturbremen.memorize.R;
-import de.kulturbremen.memorize.manager.QuestionManager;
+import de.kulturbremen.memorize.manager.QuestionsHolder;
 
 public class QuestionActivity extends AppCompatActivity {
 
@@ -20,7 +20,7 @@ public class QuestionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_question);
 
         // set the text of the question
-        QuestionManager qm = QuestionManager.getInstance();
+        QuestionsHolder qm = QuestionsHolder.getInstance();
         String question = qm.getQuestionEntity().getQuestion();
         TextView textView = findViewById(R.id.lastQuestionMessage);
         textView.setText(question);
@@ -34,7 +34,7 @@ public class QuestionActivity extends AppCompatActivity {
         EditText editText = findViewById(R.id.userAnswer);
         String userAnswer = editText.getText().toString();
         Intent intent;
-        QuestionManager qm = QuestionManager.getInstance();
+        QuestionsHolder qm = QuestionsHolder.getInstance();
 
         if (qm.checkAnswer(userAnswer)){
             intent = new Intent(this, RightAnswerActivity.class);
