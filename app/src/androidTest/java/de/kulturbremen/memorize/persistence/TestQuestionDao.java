@@ -18,7 +18,7 @@ import de.kulturbremen.memorize.persistence.dao.QuestionDao;
 import de.kulturbremen.memorize.model.QuestionEntity;
 
 @RunWith(AndroidJUnit4.class)
-public class TestQuestionEntity {
+public class TestQuestionDao {
     private QuestionDao questionDao;
     private AppDatabase db;
     private QuestionEntity testQuestion = new QuestionEntity(

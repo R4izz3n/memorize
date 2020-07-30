@@ -19,7 +19,7 @@ import de.kulturbremen.memorize.model.QuizEntity;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
-public class TestQuizEntity {
+public class TestQuizDao {
     private QuizDao quizDao;
     private AppDatabase db;
     private QuizEntity testQuiz = new QuizEntity("quiz name");
