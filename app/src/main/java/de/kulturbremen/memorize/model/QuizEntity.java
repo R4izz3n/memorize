@@ -46,7 +46,7 @@ public class QuizEntity implements Serializable {
     }
 
     public void setName(@NonNull String name) {
-        this.name = name;
+        this.name = name.trim();
     }
 
     @NonNull

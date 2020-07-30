@@ -59,7 +59,7 @@ public class QuestionEntity {
     }
 
     public void setQuestion(@NonNull String question) {
-        this.question = question;
+        this.question = question.trim();
     }
 
     @NonNull
@@ -68,7 +68,7 @@ public class QuestionEntity {
     }
 
     public void setAnswer(@NonNull String answer) {
-        this.answer = answer;
+        this.answer = answer.trim();
     }
 
     @NonNull
