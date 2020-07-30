@@ -18,9 +18,6 @@ public interface QuizDao {
     @Query("SELECT * FROM QuizEntity WHERE id = :id")
     QuizEntity getQuizById(long id);
 
-    @Query("SELECT COUNT(id) FROM QuizEntity")
-    int debug_all();
-
     @Insert
     long insertQuiz(QuizEntity quizEntity);
 

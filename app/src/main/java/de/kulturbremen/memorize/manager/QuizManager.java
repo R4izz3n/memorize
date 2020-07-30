@@ -38,9 +38,9 @@ public class QuizManager {
         if (quiz.getId() != 0) {
             quizRepository.deleteQuiz(quiz);
         }
-        long quizID = quizRepository.addQuiz(quiz);
+        quizRepository.addQuiz(quiz);
 
-        questionRepository.deleteQuestions(quizID);
+        questionRepository.deleteQuestions(quiz);
         for (QuestionEntity questionEntity: questions){
             String question = questionEntity.getQuestion().trim();
             String answer = questionEntity.getAnswer().trim();
@@ -49,8 +49,16 @@ public class QuizManager {
             }
             questionEntity.setQuestion(question);
             questionEntity.setAnswer(answer);
-            questionEntity.setQuizId(quizID);
+            questionEntity.setQuizId(quiz.getId());
             questionRepository.addQuestion(questionEntity);
+            String temp = "String";
+            StringBuilder newString = new StringBuilder();
+            for (int i = 0; i < temp.length(); i++){
+                newString.insert(0, temp.charAt(i));
+            }
+            StringBuilder bla = new StringBuilder("nahahaha");
+            bla.reverse();
+            "balbbbb".split("");
         }
     }
 
@@ -59,7 +67,7 @@ public class QuizManager {
      * @param quiz the quiz to be deleted
      */
     public void deleteQuiz(QuizEntity quiz) {
-        questionRepository.deleteQuestions(quiz.getId());
+        questionRepository.deleteQuestions(quiz);
         quizRepository.deleteQuiz(quiz);
     }
 

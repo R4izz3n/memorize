@@ -11,7 +11,7 @@ import java.time.ZonedDateTime;
 @Entity(indices = {@Index("name")})
 public class QuizEntity implements Serializable {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private Long id;
     @NonNull
     private String name;
     @NonNull
@@ -32,11 +32,11 @@ public class QuizEntity implements Serializable {
         this.dateLastAltered = ZonedDateTime.now();
     }
 
-    public int getId(){
+    public Long getId(){
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,25 +1,38 @@
 package de.kulturbremen.memorize.persistence;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.util.List;
 
 import de.kulturbremen.memorize.model.QuizEntity;
+import de.kulturbremen.memorize.persistence.dao.QuizDao;
 
 /**
  * Repository module for handling data operations.
  */
 public class QuizRepository {
-    private AppDatabase appDatabase;
+    private QuizDao quizDao;
 
+    /**
+     * constructor for business (or ui) layer
+     * @param context application Context
+     */
     public QuizRepository(Context context) {
-        appDatabase = AppDatabase.getInstance(context);
+        AppDatabase appDatabase = AppDatabase.getInstance(context);
+        quizDao = appDatabase.QuizDao();
+    }
+
+    /**
+     * constructor for testing
+     * @param quizDao a quizDao from a test database
+     */
+    public QuizRepository(QuizDao quizDao){
+        this.quizDao = quizDao;
     }
 
 
     public List<QuizEntity> getQuizzes(){
-        return appDatabase.QuizDao().getQuizzes();
+        return quizDao.getQuizzes();
     }
 
     /**
@@ -28,15 +41,11 @@ public class QuizRepository {
      * @return QuizEntity.id
      */
     public long addQuiz(QuizEntity quizEntity){
-        return appDatabase.QuizDao().insertQuiz(quizEntity);
+        return quizDao.insertQuiz(quizEntity);
     }
 
     public void deleteQuiz(QuizEntity quizEntity){
-        appDatabase.QuizDao().deleteQuiz(quizEntity);
-    }
-
-    public void updateQuiz(QuizEntity quizEntity){
-        appDatabase.QuizDao().updateQuiz(quizEntity);
+        quizDao.deleteQuiz(quizEntity);
     }
 
 }
