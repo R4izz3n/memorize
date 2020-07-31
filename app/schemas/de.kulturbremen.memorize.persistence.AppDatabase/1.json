@@ -2,17 +2,17 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "29815f18a5219f930d683dc3218b4738",
+    "identityHash": "31b91228f5d7b3d5e3faf8d03483bc5f",
     "entities": [
       {
         "tableName": "QuizEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT NOT NULL, `creationDate` TEXT NOT NULL, `dateLastAltered` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `creationDate` TEXT NOT NULL, `dateLastAltered` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
             "affinity": "INTEGER",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "name",
@@ -53,13 +53,13 @@
       },
       {
         "tableName": "QuestionEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `question` TEXT NOT NULL, `answer` TEXT NOT NULL, `creationDate` TEXT NOT NULL, `quizId` INTEGER)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `question` TEXT NOT NULL, `answer` TEXT NOT NULL, `creationDate` TEXT NOT NULL, `quizId` INTEGER)",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
             "affinity": "INTEGER",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "question",
@@ -108,7 +108,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '29815f18a5219f930d683dc3218b4738')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '31b91228f5d7b3d5e3faf8d03483bc5f')"
     ]
   }
 }

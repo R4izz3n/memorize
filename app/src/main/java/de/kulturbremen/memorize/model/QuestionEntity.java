@@ -14,6 +14,7 @@ import java.time.ZonedDateTime;
 @Entity(indices = {@Index("quizId")})
 public class QuestionEntity {
     @PrimaryKey(autoGenerate = true)
+    @NonNull
     private Long id;
     @NonNull
     private String question;
@@ -45,11 +46,12 @@ public class QuestionEntity {
         this.creationDate = ZonedDateTime.now();
     }
 
+    @NonNull
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(@NonNull Long id) {
         this.id = id;
     }
 
