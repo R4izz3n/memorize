@@ -128,7 +128,7 @@ public class EditQuizActivity extends AppCompatActivity
         }
         quizEntity.setName(quizName);
 
-        quizManager.editQuiz(quizEntity, questionList);
+        quizManager.editQuizAndQuestions(quizEntity, questionList);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
@@ -146,7 +146,7 @@ public class EditQuizActivity extends AppCompatActivity
 
     @Override
     public void onDialogPositiveClick() {
-        quizManager.deleteQuiz(quizEntity);
+        quizManager.deleteQuizAndQuestions(quizEntity);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
 

@@ -1,31 +1,48 @@
 package de.kulturbremen.memorize.manager;
 
 import android.content.Context;
+import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.kulturbremen.memorize.model.QuestionEntity;
+import de.kulturbremen.memorize.model.QuizEntity;
 import de.kulturbremen.memorize.persistence.QuestionRepository;
 import de.kulturbremen.memorize.persistence.QuizRepository;
-import de.kulturbremen.memorize.model.QuizEntity;
 
+/**
+ * business layer class to access or update data
+ * related to the models QuestionEntity and QuizEntity
+ */
 public class QuizManager {
     private QuizRepository quizRepository;
     private QuestionRepository questionRepository;
 
+    /**
+     * constructor for ui layer
+     * @param context application context
+     */
     public QuizManager(Context context) {
         this.quizRepository = new QuizRepository(context);
         this.questionRepository = new QuestionRepository(context);
     }
 
+    /**
+     * constructor for testing
+     * @param quizRepository a stand in object for QuizRepository
+     * @param questionRepository a stand in object for QuestionRepository
+     */
+    public QuizManager(QuizRepository quizRepository, QuestionRepository questionRepository){
+        this.quizRepository = quizRepository;
+        this.questionRepository = questionRepository;
+    }
+
     public List<QuizEntity> getQuizzes() {
-        List<QuizEntity> quizzes = quizRepository.getQuizzes();
-        if (quizzes == null) {
-            return new ArrayList<>();
-        } else {
-            return quizzes;
-        }
+        return quizRepository.getQuizzes();
+    }
+
+    public List<QuestionEntity> getQuestions(QuizEntity quiz){
+        return questionRepository.getQuestions(quiz);
     }
 
     /**
@@ -33,45 +50,26 @@ public class QuizManager {
      * @param quiz the QuizEntity to be edited
      * @param questions the QuestionEntities to be edited
      */
-    public void editQuiz(QuizEntity quiz, List<QuestionEntity> questions){
-        quiz.setName(quiz.getName().trim());
-        if (quiz.getId() != 0) {
-            quizRepository.deleteQuiz(quiz);
-        }
-        quizRepository.addQuiz(quiz);
+    public void editQuizAndQuestions(QuizEntity quiz, List<QuestionEntity> questions){
+        deleteQuizAndQuestions(quiz);
 
-        questionRepository.deleteQuestions(quiz);
+        long quizID = quizRepository.addQuiz(quiz);
+
         for (QuestionEntity questionEntity: questions){
-            String question = questionEntity.getQuestion().trim();
-            String answer = questionEntity.getAnswer().trim();
-            if (question.equals("") && answer.equals("")){
+            if (questionEntity.getQuestion().equals("") && questionEntity.getAnswer().equals("")){
                 continue;
             }
-            questionEntity.setQuestion(question);
-            questionEntity.setAnswer(answer);
-            questionEntity.setQuizId(quiz.getId());
+            questionEntity.setQuizId(quizID);
             questionRepository.addQuestion(questionEntity);
-            String temp = "String";
-            StringBuilder newString = new StringBuilder();
-            for (int i = 0; i < temp.length(); i++){
-                newString.insert(0, temp.charAt(i));
-            }
-            StringBuilder bla = new StringBuilder("nahahaha");
-            bla.reverse();
-            "balbbbb".split("");
         }
     }
 
     /**
-     * Delete a QuizEntity and the corresponding QuizEntities
+     * Delete a QuizEntity and the corresponding QuestionEntities
      * @param quiz the quiz to be deleted
      */
-    public void deleteQuiz(QuizEntity quiz) {
+    public void deleteQuizAndQuestions(QuizEntity quiz) {
         questionRepository.deleteQuestions(quiz);
         quizRepository.deleteQuiz(quiz);
-    }
-
-    public List<QuestionEntity> getQuestions(QuizEntity quiz){
-        return questionRepository.getQuestions(quiz);
     }
 }
