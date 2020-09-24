@@ -8,8 +8,7 @@ import androidx.room.PrimaryKey;
 import java.time.ZonedDateTime;
 
 /**
- * A class that represent a Question Entity
- * Contains more meta information than QuestionModel
+ * A class that represents a Question Entity
  */
 @Entity(indices = {@Index("quizId")})
 public class QuestionEntity {

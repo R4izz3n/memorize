@@ -69,7 +69,7 @@ public class EditQuizActivity extends AppCompatActivity
     private void setAdapter() {
         Context context = getApplicationContext();
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        questionAdapter = new QuestionRecyclerAdapter(questionList, quizEntity,
+        questionAdapter = new QuestionRecyclerAdapter(questionList,
                 this);
         recyclerView.setAdapter(questionAdapter);
     }

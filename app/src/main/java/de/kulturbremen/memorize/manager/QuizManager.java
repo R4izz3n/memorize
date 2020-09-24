@@ -1,8 +1,6 @@
 package de.kulturbremen.memorize.manager;
 
 import android.content.Context;
-import android.util.Log;
-
 import java.util.List;
 
 import de.kulturbremen.memorize.model.QuestionEntity;

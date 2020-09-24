@@ -89,14 +89,11 @@ public class QuestionsHolder {
 
     public void removeLastQuestion() throws NoMoreQuestions {
         if (unansweredQuestions.isEmpty()) {
+            questions = new ArrayList<>();  // also remove questions
             throw new NoMoreQuestions();
         }
 
         unansweredQuestions.remove(0);
-
-        if (unansweredQuestions.isEmpty()) { // then also remove QUESTIONS
-            questions = new ArrayList<>();
-        }
     }
 
     public void removeAllQuestions() {
