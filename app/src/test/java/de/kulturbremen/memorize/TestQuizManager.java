@@ -63,7 +63,7 @@ public class TestQuizManager {
     }
 
     @Test
-    public void addNewQuiz(){
+    public void editQuizAdds(){
         // GIVEN a list of questions and a stubbed QuizRepository.addQuiz
         List<QuestionEntity> questions = new ArrayList<>();
         questions.add(testQuestion);
@@ -78,29 +78,17 @@ public class TestQuizManager {
     }
 
     @Test
-    public void EditQuiz(){
+    public void EditQuizDeletes(){
         // GIVEN a list of questions and a stubbed QuizRepository.addQuiz
         List<QuestionEntity> questions = new ArrayList<>();
         questions.add(testQuestion);
         questions.add(testQuestion);
         when(fakeQuizRepository.addQuiz(any(QuizEntity.class))).thenReturn((long) 5);
+        // WHEN editQuizAndQuestions is called with a new quiz and questions
         quizManager.editQuizAndQuestions(testQuiz, questions);
-        // WHEN editQuizAndQuestions is called with an updated questions
-        questions.add(testQuestion);
-        quizManager.editQuizAndQuestions(testQuiz, questions);
-        // THEN the quiz and questions are deleted
+        // THEN the "old" quiz and questions are deleted
         verify(fakeQuestionRepository).deleteQuestions(testQuiz);
         verify(fakeQuizRepository).deleteQuiz(testQuiz);
-        // THEN quiz and then added
-        verify(fakeQuizRepository).addQuiz(testQuiz);
-        // THEN correct number of questions are added
-        verify(fakeQuestionRepository, times(questions.size())).addQuestion(testQuestion);
     }
-
-    @Test
-    public void DeleteQuizAndQuestions(){
-        // todo
-    }
-
 }
 
